@@ -1,0 +1,389 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b66c3"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="Godziny"><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon.svg"><title>Work Hours</title><style>
+:root{--b:#0b66c3;--bg:#f2f5f9;--card:#fff;--txt:#13233a;--mut:#65758b;--line:#dbe3ed;--red:#bc3434}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:calc(88px + env(safe-area-inset-bottom))}button,input,select{font:inherit}button{border:0;border-radius:12px;font-weight:700}.top{position:sticky;top:0;z-index:10;background:linear-gradient(135deg,#094c91,var(--b));color:#fff;padding:calc(10px + env(safe-area-inset-top)) 14px 12px}.toprow{display:flex;align-items:center;justify-content:space-between;gap:10px}.top h1{font-size:21px;margin:0}.top small{opacity:.85}.langs{display:flex;gap:4px}.langs button{font-size:21px;padding:6px;background:#ffffff1f}.langs button.on{background:#fff}.period{display:grid;grid-template-columns:44px 1fr 44px;gap:6px;margin-top:12px}.period button,.period select{height:42px;border:0;border-radius:11px}.period select{width:100%;padding:0 8px}.wrap{padding:12px}.summary{display:grid;grid-template-columns:1fr 1fr;gap:9px}.metric,.entry,.menuBox{background:var(--card);border:1px solid var(--line);border-radius:15px;box-shadow:0 4px 16px #17355b0c}.metric{padding:12px}.metric.clickable{cursor:pointer;box-shadow:0 4px 16px #17355b18}.metric.clickable:active{transform:scale(.98)}.metric span{display:block;font-size:12px;color:var(--mut)}.metric b{display:block;font-size:22px;margin-top:4px}.sectionTitle{display:flex;justify-content:space-between;align-items:center;margin:18px 2px 9px}.sectionTitle h2{font-size:17px;margin:0}.entry{padding:14px;margin-bottom:9px}.entryHead{display:flex;justify-content:space-between;gap:10px}.entryDate{font-weight:800;font-size:17px}.entryTime{font-size:18px;font-weight:800;margin:7px 0}.chips{display:flex;flex-wrap:wrap;gap:5px}.chip{font-size:12px;padding:5px 8px;border-radius:999px;background:#eaf3ff;color:#0956a4}.chip.p50{background:#fff1d9;color:#8a5700}.chip.p100{background:#ffe6e6;color:#a22222}.chip.tb{background:#e9f8ef;color:#17613a}.actions{display:flex;gap:7px;margin-top:12px}.actions button{padding:7px 10px;background:#eef3f8;font-size:13px}.actions .delete{color:var(--red)}.empty{background:#fff;border-radius:15px;padding:28px;text-align:center;color:var(--mut)}.bottom{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--line);padding:9px 12px calc(9px + env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr 1.6fr 1fr;gap:7px}.bottom button{min-height:48px;background:#eef3f8}.bottom .add{background:var(--b);color:#fff}.modal{display:none;position:fixed;inset:0;z-index:30;background:#0007;align-items:flex-end}.modal.open{display:flex}.sheet{width:100%;max-height:92vh;overflow:auto;background:#fff;border-radius:22px 22px 0 0;padding:14px 16px calc(18px + env(safe-area-inset-bottom))}.handle{width:42px;height:5px;border-radius:999px;background:#cad3dd;margin:0 auto 12px}.sheet h2{margin:0}.field{margin-top:11px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:5px}.field input,.field select{width:100%;height:46px;padding:0 11px;border:1px solid var(--line);border-radius:11px;background:#fff;font-size:16px}.timeRow{display:flex;justify-content:center;align-items:flex-end;gap:12px;margin-top:4px}.timeField{width:116px}.timeField input{width:116px;text-align:center;padding:0 5px;font-weight:750}.dateField{display:flex;flex-direction:column;align-items:center}.dateField input{width:148px;text-align:center;padding:0 7px;font-weight:750}.field textarea{width:100%;min-height:82px;padding:10px 11px;border:1px solid var(--line);border-radius:11px;background:#fff;font:inherit;resize:vertical}.quick{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:7px}.quick button{padding:7px 11px;background:#edf4fc}.sheetButtons{display:grid;grid-template-columns:1fr 1.7fr;gap:8px;margin-top:16px}.sheetButtons button{height:48px;background:#edf2f7}.sheetButtons .save{background:var(--b);color:#fff}.menuBox{width:calc(100% - 24px);margin:0 12px 12px;padding:10px}.menuBox h2{padding:8px 6px}.menuBox button{display:block;width:100%;height:50px;margin:6px 0;background:#eef3f8;text-align:left;padding:0 14px}.menuBox .close{color:var(--red);text-align:center}.importChoice{display:none}.importChoice.show{display:block}.status{font-size:13px;color:var(--mut);padding:6px}.payGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.payBox{background:#f4f7fb;border:1px solid var(--line);border-radius:12px;padding:10px}.payBox span{display:block;font-size:12px;color:var(--mut)}.payBox b{display:block;font-size:18px;margin-top:3px}.payTotal{background:#e8f7ee;border-color:#b9dfc8}.payTotal b{color:#17613a;font-size:23px}.adminHint{text-align:center;font-size:12px;color:var(--mut);margin-top:8px}.top h1{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}.sessionGate{position:fixed;inset:0;z-index:120;background:linear-gradient(135deg,#083e75,#0b66c3);display:grid;place-items:center;padding:18px}.sessionGate.hidden{display:none}.sessionCard{width:min(100%,410px);background:#fff;color:var(--txt);border-radius:20px;padding:22px;text-align:center;box-shadow:0 18px 50px #001b3a55}.sessionCard button{width:100%;height:48px;margin-top:12px;background:var(--b);color:#fff}.cloudBar{text-align:center;font-size:12px;margin-top:8px;opacity:.9}.cloudUser{font-size:11px;opacity:.9}.hidden{display:none!important}@media(max-width:390px){.timeField{width:108px}.timeField input{width:108px}.dateField input{width:140px}.timeRow{gap:8px}.sheet{padding-left:12px;padding-right:12px}}@media(min-width:760px){.wrap{max-width:740px;margin:auto}.bottom{left:50%;transform:translateX(-50%);max-width:740px}.sheet{max-width:600px;margin:auto;border-radius:22px}.modal{align-items:center}.summary{grid-template-columns:repeat(3,1fr)}.menuBox{max-width:460px;margin:auto}}
+
+/* HOURS2 PREMIUM MOBILE FIX - visual layer only */
+:root{--b:#3b82f6;--bg:#07111f;--card:#11243a;--txt:#f8fafc;--mut:#9fb0c3;--line:rgba(255,255,255,.11);--red:#f87171;--shadow:0 14px 38px rgba(0,0,0,.28)}
+html{min-height:100%;background:#07111f;color-scheme:dark;overflow-x:hidden}
+body{width:100%;max-width:100%;min-height:100vh;overflow-x:hidden;background:linear-gradient(145deg,#07111f,#0b1727 58%,#07111f)!important;color:var(--txt);padding-bottom:calc(76px + env(safe-area-inset-bottom))!important}
+button,input,select,textarea{max-width:100%;font:inherit}.top{position:sticky;top:0;z-index:20;min-height:auto;padding:calc(10px + env(safe-area-inset-top)) 14px 12px;background:rgba(7,17,31,.94)!important;border-bottom:1px solid var(--line);box-shadow:0 10px 28px rgba(0,0,0,.18);backdrop-filter:blur(18px) saturate(1.15)}
+.toprow{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;min-width:0}.titleGroup{display:flex;align-items:flex-start;gap:10px;min-width:0;flex:1}.titleText{min-width:0}.top h1{font-size:21px;font-weight:900;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.top small{display:block;color:#b8c9da;opacity:1;white-space:nowrap}.lobbyBtn{flex:0 0 42px;width:42px;height:42px;padding:0;border:1px solid rgba(255,255,255,.15);border-radius:12px;background:rgba(255,255,255,.08);color:#fff;font-size:19px;box-shadow:none}.lobbyBtn:active{transform:scale(.96)}.langs{flex:0 0 auto;display:flex;gap:3px}.langs button{font-size:19px;padding:5px;border:1px solid rgba(255,255,255,.13);border-radius:10px;background:rgba(255,255,255,.07)}.langs button.on{background:rgba(96,165,250,.25);box-shadow:inset 0 0 0 1px rgba(147,197,253,.28)}
+.period{grid-template-columns:42px minmax(0,1fr) 42px;gap:7px;margin-top:12px}.period button,.period select{height:42px;border:1px solid var(--line);background:rgba(255,255,255,.065);color:#fff}.period select{min-width:0;width:100%;padding:0 8px;overflow:hidden;text-overflow:ellipsis}
+.wrap{width:100%;max-width:900px;margin:0 auto;padding:14px 12px 20px;overflow:hidden}.summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;min-width:0}.metric,.entry,.menuBox{min-width:0;overflow:hidden;background:linear-gradient(145deg,#152b45,#0c1b2d)!important;border:1px solid var(--line)!important;border-radius:18px!important;box-shadow:var(--shadow)!important;color:#fff}.metric{padding:14px;min-height:91px;animation:hoursFadeUp .4s ease both}.metric span,.metric small{color:var(--mut)}.metric b{color:#fff;font-size:23px;overflow-wrap:anywhere}.metric.clickable{box-shadow:var(--shadow)!important}.metric:after,.entry:after{display:none!important}.cloudBar{display:flex;justify-content:flex-end;align-items:center;gap:5px;min-height:24px;margin:10px 3px 0;padding:0;text-align:right;color:#7890a6;font-size:10px;line-height:1.25;opacity:.85;white-space:normal;overflow-wrap:anywhere}.cloudUser{max-width:48%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sectionTitle{margin-top:16px}.sectionTitle h2{color:#fff}.entry{padding:14px;margin-bottom:10px}.entryHead{min-width:0}.entryDate,.entryTime{color:#fff}.chips{min-width:0}.chip{max-width:100%;overflow-wrap:anywhere;border:1px solid rgba(96,165,250,.20);background:rgba(59,130,246,.13);color:#bfdbfe}.chip.p50{background:rgba(245,158,11,.15);color:#fcd34d}.chip.p100{background:rgba(239,68,68,.14);color:#fca5a5}.chip.tb{background:rgba(34,197,94,.14);color:#86efac}.actions{flex-wrap:wrap}.actions button{background:rgba(255,255,255,.07);color:#dbeafe;border:1px solid var(--line)}.actions .delete{color:#fca5a5}.empty{background:#11243a;color:var(--mut);border:1px solid var(--line);box-shadow:var(--shadow)}
+.bottom{left:0!important;right:0!important;bottom:0!important;transform:none!important;width:100%!important;max-width:none!important;padding:8px 10px max(8px,env(safe-area-inset-bottom))!important;background:rgba(7,17,31,.96)!important;border-top:1px solid var(--line)!important;box-shadow:0 -12px 30px rgba(0,0,0,.24);backdrop-filter:blur(18px)}.bottom button{min-width:0;min-height:48px;padding:7px 5px;background:rgba(255,255,255,.07);color:#dbeafe;border:1px solid var(--line);font-size:13px;white-space:normal;line-height:1.15}.bottom .add{background:linear-gradient(135deg,#2563eb,#38bdf8);color:#fff;border-color:transparent;box-shadow:0 8px 22px rgba(37,99,235,.28)}
+.modal{background:rgba(2,8,16,.78);backdrop-filter:blur(8px)}.sheet{width:100%;max-width:620px;max-height:calc(100dvh - env(safe-area-inset-top));background:linear-gradient(145deg,#172c45,#0b1a2c);color:#fff;border:1px solid var(--line);box-shadow:0 28px 70px rgba(0,0,0,.48)}.field{min-width:0}.field label{color:#c6d4e1}.field input,.field select,.field textarea{width:100%;min-width:0;background:#071522;color:#fff;border-color:rgba(148,163,184,.28)}.timeRow{width:100%;max-width:100%;gap:9px}.timeField{width:min(116px,31vw)}.timeField input{width:100%}.dateField input{width:min(148px,44vw)}.quick button,.sheetButtons button,.menuBox button{background:rgba(255,255,255,.07);color:#dbeafe;border:1px solid var(--line)}.sheetButtons .save{background:linear-gradient(135deg,#2563eb,#38bdf8);color:#fff;border-color:transparent}.payBox{min-width:0;background:rgba(255,255,255,.045);border-color:var(--line);color:#fff}.payBox span,.status,.adminHint{color:var(--mut)}.payTotal{background:rgba(34,197,94,.13);border-color:rgba(74,222,128,.22)}.payTotal b{color:#86efac}.menuBox{background:linear-gradient(145deg,#172c45,#0b1a2c)}.sessionGate{padding:calc(18px + env(safe-area-inset-top)) 18px calc(18px + env(safe-area-inset-bottom));background:linear-gradient(145deg,#07111f,#0c1b2e)}.sessionCard{background:#0f1f33;color:#fff;border:1px solid var(--line);box-shadow:0 24px 65px rgba(0,0,0,.42)}.sessionCard p{color:var(--mut)}.sessionCard button{background:linear-gradient(135deg,#2563eb,#38bdf8);color:#fff}
+@keyframes hoursFadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:430px){.top{padding-left:10px;padding-right:10px}.titleGroup{gap:7px}.lobbyBtn{width:39px;height:39px;flex-basis:39px}.top h1{font-size:18px}.top small{font-size:11px}.langs button{font-size:17px;padding:4px}.wrap{padding-left:10px;padding-right:10px}.summary{gap:8px}.metric{padding:12px;min-height:86px}.metric b{font-size:21px}.cloudBar{justify-content:flex-end;font-size:9px}.bottom{grid-template-columns:minmax(0,1fr) minmax(0,1.45fr) minmax(0,1fr)!important;gap:6px!important}.bottom button{font-size:12px}.payGrid{grid-template-columns:1fr 1fr;gap:7px}.sheet{padding-left:12px;padding-right:12px}.timeRow{gap:7px}.timeField{width:min(108px,30vw)}}
+@media(max-width:345px){.summary{grid-template-columns:1fr}.toprow{align-items:flex-start}.langs{position:absolute;right:8px;top:calc(54px + env(safe-area-inset-top))}.top{padding-bottom:50px}.bottom button{font-size:11px}.payGrid{grid-template-columns:1fr}}
+@media(min-width:760px){.bottom{left:50%!important;right:auto!important;transform:translateX(-50%)!important;width:min(900px,100%)!important;border-left:1px solid var(--line);border-right:1px solid var(--line);border-radius:18px 18px 0 0}.summary{grid-template-columns:repeat(3,minmax(0,1fr))}.modal{align-items:center}.sheet{border-radius:24px}.menuBox{max-width:480px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* HOURS2 MOBILE HOTFIX 2: bottom bar and form spacing */
+html,body{min-height:100%;margin:0!important}
+body{padding-bottom:60px!important}
+.bottom{
+  position:fixed!important;
+  left:0!important;
+  right:0!important;
+  bottom:-1px!important;
+  width:100%!important;
+  max-width:none!important;
+  transform:none!important;
+  padding:7px 10px 8px!important;
+  margin:0!important;
+}
+#entryModal .timeRow,#payModal .timeRow,#tbModal .timeRow{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:16px!important;
+  width:100%!important;
+  align-items:end!important;
+}
+#entryModal .timeField,#payModal .timeField,#tbModal .timeField{
+  width:auto!important;
+  min-width:0!important;
+}
+#entryModal .timeField input,#payModal .timeField input,#tbModal .timeField input,
+#tbModal .timeField select{
+  width:100%!important;
+  min-width:0!important;
+}
+@media(max-width:390px){
+  body{padding-bottom:58px!important}
+  .bottom{padding:6px 8px 7px!important;gap:6px!important}
+  .bottom button{min-height:44px!important}
+  #entryModal .timeRow,#payModal .timeRow,#tbModal .timeRow{gap:14px!important}
+}
+@media(min-width:760px){
+  .bottom{left:50%!important;right:auto!important;transform:translateX(-50%)!important;width:min(900px,100%)!important}
+}
+
+/* HOURS2 FINAL MOBILE LAYOUT FIX */
+html,body{
+  width:100%!important;
+  height:100%!important;
+  min-height:100%!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background:#07111f!important;
+}
+body{
+  display:flex!important;
+  flex-direction:column!important;
+}
+.top{
+  position:relative!important;
+  top:auto!important;
+  flex:0 0 auto!important;
+}
+.wrap{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  width:100%!important;
+  max-width:900px!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch!important;
+  padding:14px 12px 18px!important;
+}
+.bottom{
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+  bottom:auto!important;
+  flex:0 0 auto!important;
+  width:100%!important;
+  max-width:none!important;
+  transform:none!important;
+  margin:0!important;
+  padding:7px 10px max(7px,env(safe-area-inset-bottom))!important;
+  border-radius:0!important;
+}
+.cloudBar{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:5px!important;
+  width:100%!important;
+  margin:10px auto 16px!important;
+  text-align:center!important;
+}
+#entryModal .timeRow,
+#payModal .timeRow,
+#tbModal .timeRow{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  column-gap:22px!important;
+  row-gap:12px!important;
+  width:100%!important;
+  align-items:end!important;
+  justify-content:stretch!important;
+}
+#entryModal .timeField,
+#payModal .timeField,
+#tbModal .timeField{
+  width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+}
+#entryModal .timeField input,
+#payModal .timeField input,
+#tbModal .timeField input,
+#tbModal .timeField select{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  padding-left:8px!important;
+  padding-right:8px!important;
+}
+.modal{
+  height:100%!important;
+}
+@media(max-width:390px){
+  .wrap{padding:12px 10px 14px!important}
+  .bottom{padding:6px 8px max(6px,env(safe-area-inset-bottom))!important}
+  #entryModal .timeRow,#payModal .timeRow,#tbModal .timeRow{column-gap:18px!important}
+}
+@media(max-width:340px){
+  #entryModal .timeRow,#payModal .timeRow,#tbModal .timeRow{
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+  }
+}
+@media(min-width:760px){
+  .bottom{
+    left:auto!important;
+    right:auto!important;
+    transform:none!important;
+    width:min(900px,100%)!important;
+    align-self:center!important;
+    border-left:1px solid var(--line)!important;
+    border-right:1px solid var(--line)!important;
+    border-radius:18px 18px 0 0!important;
+  }
+}
+
+/* HOURS2 TIME FIELDS COMPACT FIX */
+#entryModal .timeRow{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:flex-end!important;
+  gap:24px!important;
+  width:100%!important;
+}
+#entryModal .timeField{
+  flex:0 0 118px!important;
+  width:118px!important;
+  min-width:0!important;
+  margin:0!important;
+}
+#entryModal .timeField input{
+  display:block!important;
+  width:118px!important;
+  max-width:118px!important;
+  min-width:0!important;
+  height:46px!important;
+  padding:0 7px!important;
+  text-align:center!important;
+  font-size:16px!important;
+}
+@media(max-width:390px){
+  #entryModal .timeRow{gap:18px!important}
+  #entryModal .timeField,#entryModal .timeField input{
+    flex-basis:108px!important;
+    width:108px!important;
+    max-width:108px!important;
+  }
+}
+@media(max-width:320px){
+  #entryModal .timeRow{gap:12px!important}
+  #entryModal .timeField,#entryModal .timeField input{
+    flex-basis:98px!important;
+    width:98px!important;
+    max-width:98px!important;
+  }
+}
+
+/* HOURS2 FINAL TIME CENTER + STATUS BAR FIX */
+html,body{background:#07111f!important}
+.top{background:#07111f!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important}
+#entryModal input[type="time"]{
+  display:block!important;
+  box-sizing:border-box!important;
+  width:118px!important;
+  max-width:118px!important;
+  height:46px!important;
+  padding:0 6px!important;
+  text-align:center!important;
+  text-align-last:center!important;
+  font-size:16px!important;
+  line-height:46px!important;
+  font-variant-numeric:tabular-nums!important;
+  direction:ltr!important;
+}
+#entryModal input[type="time"]::-webkit-date-and-time-value{
+  display:flex!important;
+  width:100%!important;
+  height:100%!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin:0!important;
+  padding:0!important;
+  text-align:center!important;
+}
+#entryModal input[type="time"]::-webkit-datetime-edit{
+  display:flex!important;
+  flex:1!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin:0!important;
+  padding:0!important;
+}
+#entryModal input[type="time"]::-webkit-datetime-edit-fields-wrapper{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin:0 auto!important;
+  padding:0!important;
+}
+@media(max-width:390px){
+  #entryModal input[type="time"]{width:108px!important;max-width:108px!important}
+}
+@media(max-width:320px){
+  #entryModal input[type="time"]{width:98px!important;max-width:98px!important}
+}
+
+/* HOURS-ONLY LANGUAGE SWITCH */
+.langs{display:none!important}
+body[data-account-type="hours"] .langs{display:flex!important}
+body[data-account-type="lobby"] .langs{display:none!important}
+
+/* HOURS FINAL SAFE AREA + PAY BUTTON */
+.top{
+  padding-top:calc(20px + env(safe-area-inset-top))!important;
+  min-height:calc(118px + env(safe-area-inset-top))!important;
+}
+.bottom{grid-template-columns:1fr 1.45fr 1fr!important}
+#payBtn{background:rgba(255,255,255,.07);color:#dbeafe;border:1px solid var(--line)}
+@media(max-width:430px){
+  .top{padding-top:calc(18px + env(safe-area-inset-top))!important;min-height:calc(114px + env(safe-area-inset-top))!important}
+}
+
+/* HOURS FINAL REQUEST 2026-09-29 */
+.top{
+  padding-top:calc(26px + env(safe-area-inset-top))!important;
+  min-height:calc(126px + env(safe-area-inset-top))!important;
+}
+.appFooter{
+  flex:0 0 auto;
+  text-align:center;
+  font-size:10px;
+  line-height:1.45;
+  color:#7890a0;
+  opacity:.55;
+  padding:9px 12px 7px;
+  background:#07111f;
+  user-select:none;
+}
+@media(max-width:430px){
+  .top{
+    padding-top:calc(24px + env(safe-area-inset-top))!important;
+    min-height:calc(122px + env(safe-area-inset-top))!important;
+  }
+}
+
+/* HOURS PERIOD LABEL + SCROLL FOOTER FIX */
+.wrap .appFooter{
+  display:block;
+  position:static!important;
+  width:100%;
+  margin:28px 0 6px;
+  padding:14px 12px 10px;
+  text-align:center;
+  font-size:10px;
+  line-height:1.45;
+  color:#7890a0;
+  opacity:.55;
+  background:transparent!important;
+  user-select:none;
+}
+
+/* HOURS V1 DESKTOP HEADER AND PERIOD FIX */
+.titleGroup{position:relative!important;width:100%!important;display:grid!important;grid-template-columns:42px minmax(0,1fr) 42px!important;align-items:start!important}
+.titleText{grid-column:2!important;text-align:center!important;justify-self:center!important;width:100%!important}
+#appTitle{text-align:center!important;width:100%!important}
+#homeLobbyBtn{grid-column:1!important;grid-row:1!important;justify-self:start!important}
+@media(min-width:760px){
+  .period{grid-template-columns:42px 260px 42px!important;justify-content:center!important}
+  .period select{width:260px!important;max-width:260px!important;background:#0d1d31!important;color:#f8fafc!important;border:1px solid rgba(255,255,255,.12)!important;color-scheme:dark!important}
+  .period select option{background:#0d1d31!important;color:#f8fafc!important}
+  .period select option:checked{background:#2563eb!important;color:#fff!important}
+}
+.wrap .appFooter{line-height:1.5!important}
+
+/* HOURS LOGIN LANGUAGE + REGISTRATION */
+.loginLangs{display:flex;justify-content:center;gap:8px;margin:0 0 14px}.loginLangs button{width:48px!important;height:42px!important;margin:0!important;border:1px solid rgba(255,255,255,.14)!important;background:rgba(255,255,255,.07)!important;font-size:21px}.loginLangs button.active{background:rgba(59,130,246,.28)!important;border-color:#60a5fa!important}.hoursAuthForm{display:grid;gap:10px;margin-top:14px}.hoursAuthForm input{width:100%;height:46px;padding:0 12px;border:1px solid #334a62;border-radius:12px;background:#091728;color:#fff}.hoursAuthForm button{width:100%;height:46px;margin:0;background:linear-gradient(135deg,#2563eb,#38bdf8);color:#fff}.hoursRegister{background:rgba(255,255,255,.08)!important;border:1px solid rgba(255,255,255,.14)!important}.sessionDivider{display:flex;align-items:center;gap:10px;margin:14px 0 4px;color:#7890a6;font-size:12px}.sessionDivider:before,.sessionDivider:after{content:"";height:1px;flex:1;background:rgba(255,255,255,.12)}
+</style></head><body><section id="sessionGate" class="sessionGate"><div class="sessionCard"><h2>Moje godziny</h2><div class="loginLangs"><button type="button" data-login-lang="pl">🇵🇱</button><button type="button" data-login-lang="en">🇬🇧</button><button type="button" data-login-lang="no">🇳🇴</button></div><p id="sessionMessage">Sprawdzanie sesji...</p><form id="hoursAuthForm" class="hoursAuthForm"><input id="hoursAuthName" autocomplete="name" placeholder="Imię i nazwisko"><input id="hoursAuthEmail" type="email" autocomplete="username" placeholder="E-mail" required><input id="hoursAuthPassword" type="password" autocomplete="current-password" placeholder="Hasło" required><button id="hoursLoginBtn" type="submit">Zaloguj do Hours</button><button id="hoursRegisterBtn" class="hoursRegister" type="button">Zarejestruj się</button></form><div class="sessionDivider" id="loginOrText">lub</div><button id="backToLobby">Wróć do lobby</button></div></section><header class="top"><div class="toprow"><div class="titleGroup"><button id="homeLobbyBtn" class="lobbyBtn" type="button" aria-label="Wróć do lobby" title="Wróć do lobby">🏠</button><div class="titleText"><h1 id="appTitle">Moje godziny</h1><small id="appSub">Okres rozliczeniowy 26–25</small></div></div><div class="langs"><button data-lang="pl">🇵🇱</button><button data-lang="en">🇬🇧</button><button data-lang="no">🇳🇴</button></div></div><div class="period"><button id="prev">‹</button><select id="period"></select><button id="next">›</button></div></header><main class="wrap"><section class="summary"><div class="metric"><span id="lReg">Zwykłe</span><b id="reg">0:00</b></div><div class="metric"><span>50%</span><b id="p50">0:00</b></div><div class="metric"><span>100%</span><b id="p100">0:00</b></div><div class="metric clickable" id="timeBankCard"><span id="lTb">Time bank</span><b id="tb">0:00</b><small id="tbHint">Kliknij, aby wykorzystać</small></div><div class="metric"><span id="lVw">Vakt pn–pt</span><b id="vw">0</b></div><div class="metric"><span id="lVe">Vakt weekend</span><b id="ve">0</b></div></section><div class="cloudBar"><span id="cloudUser"></span> · <span id="cloudStatus">Sprawdzanie sesji...</span></div><div class="sectionTitle"><h2 id="historyTitle">Historia wpisów</h2></div><section id="entries"></section><footer class="appFooter">Hours v1.1.2<br>Created and designed by: Daniel Wawrzyniak</footer></main><nav class="bottom"><button id="quickExcel">📊 Excel</button><button class="add" id="add">＋ <span id="addText">Dodaj wpis</span></button><button id="payBtn">💰 <span id="payText">Wypłata</span></button></nav><div class="modal" id="entryModal"><div class="sheet"><div class="handle"></div><h2 id="modalTitle">Dodaj wpis</h2><form id="form"><input type="hidden" id="editId"><div class="field dateField"><label id="dateLabel">Data</label><input id="date" type="date" required><div class="quick"><button type="button" id="today">Dzisiaj</button><button type="button" id="yesterday">Wczoraj</button></div></div><div class="timeRow"><div class="field timeField"><label id="fromLabel">Od</label><input id="start" type="time" required></div><div class="field timeField"><label id="toLabel">Do</label><input id="end" type="time" required></div></div><div class="quick"><button type="button" data-start="05:30">05:30</button><button type="button" data-start="07:00">07:00</button><button type="button" data-start="09:00">09:00</button></div><div class="field"><label id="typeLabel">Sposób rozliczenia</label><select id="type"><option value="regular">Zwykłe godziny</option><option value="timebank">Time bank</option><option value="vakt">Vakt</option><option value="bonus">BONUS</option><option value="shift10">Zmiana 10h</option></select></div><div class="field"><label id="noteLabel">Notatka</label><input id="note" maxlength="100"></div><div class="sheetButtons"><button type="button" id="cancel">Anuluj</button><button class="save" id="save" type="submit">Zapisz</button></div></form></div></div><div class="modal" id="payModal"><div class="sheet"><div class="handle"></div><h2 id="payTitle">Kalkulator wynagrodzenia</h2><form id="payForm"><div class="field"><label id="payPeriodLabel">Okres rozliczeniowy</label><select id="payPeriod"></select></div><div class="timeRow"><div class="field timeField"><label id="rateLabel">Stawka NOK/h</label><input id="hourlyRate" type="number" min="0" step="0.01" inputmode="decimal" required></div><div class="field timeField"><label id="taxLabel">Podatek %</label><input id="taxRate" type="number" min="0" max="100" step="0.1" inputmode="decimal" required></div></div><div class="status" id="payRules">50% = 1,5× stawka · 100% = 2× stawka · Vakt pn–pt = 400 NOK · Vakt weekend = 500 NOK · Jedzenie = 20 NOK/dzień</div><div class="payGrid"><div class="payBox"><span id="grossLabel">Brutto</span><b id="grossPay">0,00 NOK</b></div><div class="payBox"><span id="foodLabel">Jedzenie</span><b id="foodDeduction">0,00 NOK</b></div><div class="payBox"><span id="taxAmountLabel">Podatek</span><b id="taxAmount">0,00 NOK</b></div><div class="payBox payTotal"><span id="netLabel">Netto</span><b id="netPay">0,00 NOK</b></div></div><div id="payBreakdown" class="status"></div><div class="sheetButtons"><button type="button" id="payCancel">Anuluj</button><button class="save" id="paySave" type="submit">Zapisz ustawienia</button></div></form></div></div><div class="modal" id="tbModal"><div class="sheet"><div class="handle"></div><h2 id="tbModalTitle">Wykorzystaj Time bank</h2><p id="tbBalanceText" class="status"></p><form id="tbForm"><div class="field dateField"><label id="tbDateLabel">Data odjęcia</label><input id="tbUseDate" type="date" required></div><div class="timeRow"><div class="field timeField"><label id="tbHoursLabel">Godziny</label><input id="tbUseHours" type="number" min="0" max="999" value="7" required></div><div class="field timeField"><label id="tbMinutesLabel">Minuty</label><select id="tbUseMinutes"><option value="0">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select></div></div><div class="field"><label id="tbDaysLabel">Dni wolne pokryte z Time bank</label><textarea id="tbCoveredDays" placeholder="Np. 12.10.2026 i 13.10.2026" required></textarea></div><div class="sheetButtons"><button type="button" id="tbCancel">Anuluj</button><button class="save" id="tbSave" type="submit">Odejmij godziny</button></div></form></div></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script><script>
+const SUPABASE_URL='https://xgcowpifwmihuukjinuf.supabase.co';
+const SUPABASE_KEY='sb_publishable_OvfeU9VHpQt-A8e8MX_ZQQ_tfMpQ3N_';
+const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const KEY='work_hours_mobile_v3';let data=[],lang=(new URLSearchParams(location.search).get('lang')||localStorage.getItem('vf-language')||'pl'),pendingImport=null,currentUser=null,cloudReady=false,syncTimer=null,legacyData=[];for(const k of [KEY,'work_hours_mobile_v2','mobile_hours_v1']){try{let v=JSON.parse(localStorage.getItem(k)||'null');if(Array.isArray(v)){data=v;break}}catch(e){}}legacyData=JSON.parse(JSON.stringify(data));const $=x=>document.getElementById(x),pad=n=>String(n).padStart(2,'0'),mins=t=>{let[a,b]=t.split(':').map(Number);return a*60+b},round15=n=>Math.round(n/15)*15,fmt=n=>`${Math.floor(n/60)}:${pad(Math.round(n)%60)}`,dte=x=>new Date(x+'T12:00:00');
+const T={pl:{title:'Moje godziny',sub:'Okres rozliczeniowy 26–25',reg:'Zwykłe',tb:'Time bank',vw:'Vakt pn–pt',ve:'Vakt weekend',history:'Historia wpisów',add:'Dodaj wpis',data:'Dane',date:'Data',today:'Dzisiaj',yesterday:'Wczoraj',from:'Od',to:'Do',type:'Sposób rozliczenia',note:'Notatka',cancel:'Anuluj',save:'Zapisz',regular:'Zwykłe godziny',vakt:'Vakt',empty:'Brak wpisów w tym okresie',edit:'Edytuj',del:'Usuń',paid:'Płatne',tbHint:'Kliknij, aby wykorzystać',tbUse:'Wykorzystaj Time bank',balance:'Dostępne saldo',deductDate:'Data odjęcia',hours:'Godziny',minutes:'Minuty',coveredDays:'Dni wolne pokryte z Time bank',deduct:'Odejmij godziny',shift10:'Zmiana 10h',exportData:'Eksport danych JSON',importData:'Import danych JSON',mergeData:'Połącz dane',replaceData:'Zastąp obecne dane',back:'Wróć',close:'Zamknij',importReady:'wpisów gotowych do importu.',payTitle:'Kalkulator wynagrodzenia',payInfo:'Ustawienia są zapisywane osobno dla każdego okresu.',payPeriod:'Okres rozliczeniowy',rate:'Stawka NOK/h',tax:'Podatek %',gross:'Brutto',food:'Jedzenie',taxAmount:'Podatek',net:'Netto',savePay:'Zapisz ustawienia',payButton:'Wypłata'},en:{title:'My Work Hours',sub:'Payroll period 26–25',reg:'Regular',tb:'Time bank',vw:'Weekday on-call',ve:'Weekend on-call',history:'Entry history',add:'Add entry',data:'Data',date:'Date',today:'Today',yesterday:'Yesterday',from:'From',to:'To',type:'Entry type',note:'Note',cancel:'Cancel',save:'Save',regular:'Regular hours',vakt:'On-call duty',empty:'No entries in this period',edit:'Edit',del:'Delete',paid:'Paid',tbHint:'Tap to use',tbUse:'Use Time bank',balance:'Available balance',deductDate:'Deduction date',hours:'Hours',minutes:'Minutes',coveredDays:'Days off covered by Time bank',deduct:'Deduct hours',shift10:'10-hour shift',exportData:'Export data JSON',importData:'Import data JSON',mergeData:'Merge data',replaceData:'Replace current data',back:'Back',close:'Close',importReady:'entries ready to import.',payTitle:'Pay calculator',payInfo:'Settings are saved separately for each payroll period.',payPeriod:'Payroll period',rate:'Rate NOK/h',tax:'Tax %',gross:'Gross',food:'Food',taxAmount:'Tax',net:'Net',savePay:'Save settings',payButton:'Pay'},no:{title:'Mine arbeidstimer',sub:'Lønnsperiode 26–25',reg:'Vanlige',tb:'Timebank',vw:'Vakt ukedag',ve:'Vakt helg',history:'Historikk',add:'Legg til',data:'Data',date:'Dato',today:'I dag',yesterday:'I går',from:'Fra',to:'Til',type:'Registreringstype',note:'Notat',cancel:'Avbryt',save:'Lagre',regular:'Vanlige timer',vakt:'Vakt',empty:'Ingen oppføringer i perioden',edit:'Rediger',del:'Slett',paid:'Betalt',tbHint:'Trykk for å bruke',tbUse:'Bruk Timebank',balance:'Tilgjengelig saldo',deductDate:'Trekkdato',hours:'Timer',minutes:'Minutter',coveredDays:'Fridager dekket av Timebank',deduct:'Trekk timer',shift10:'10-timers skift',exportData:'Eksporter data som JSON',importData:'Importer data fra JSON',mergeData:'Slå sammen data',replaceData:'Erstatt eksisterende data',back:'Tilbake',close:'Lukk',importReady:'oppføringer klare for import.',payTitle:'Lønnskalkulator',payInfo:'Innstillinger lagres separat for hver lønnsperiode.',payPeriod:'Lønnsperiode',rate:'Sats NOK/t',tax:'Skatt %',gross:'Brutto',food:'Mat',taxAmount:'Skatt',net:'Netto',savePay:'Lagre innstillinger',payButton:'Lønn'}};
+const PAY_T={pl:{rules:'50% = 1,5× stawka · 100% = 2× stawka · Vakt pn–pt = 400 NOK · Vakt weekend = 500 NOK · Jedzenie = 20 NOK/dzień',vakt:'Vakt',day:'dzień',days:'dni'},no:{rules:'50 % = 1,5× sats · 100 % = 2× sats · Vakt ukedag = 400 NOK · Vakt helg = 500 NOK · Mat = 20 NOK/dag',vakt:'Vakt',day:'dag',days:'dager'},en:{rules:'50% = 1.5× rate · 100% = 2× rate · Weekday on-call = 400 NOK · Weekend on-call = 500 NOK · Food = 20 NOK/day',vakt:'On-call',day:'day',days:'days'}};
+const AUTH_T={pl:{name:'Imię i nazwisko',password:'Hasło',login:'Zaloguj do Hours',register:'Zarejestruj się',or:'lub',back:'Wróć do lobby',noSession:'Brak aktywnej sesji. Zaloguj się lub utwórz konto.',created:'Konto utworzone. Sprawdź e-mail, jeśli wymagane jest potwierdzenie.',required:'Podaj e-mail i hasło.'},en:{name:'Full name',password:'Password',login:'Sign in to Hours',register:'Create account',or:'or',back:'Back to Lobby',noSession:'No active session. Sign in or create an account.',created:'Account created. Check your email if confirmation is required.',required:'Enter an email and password.'},no:{name:'Fullt navn',password:'Passord',login:'Logg inn i Hours',register:'Opprett konto',or:'eller',back:'Tilbake til Lobby',noSession:'Ingen aktiv økt. Logg inn eller opprett en konto.',created:'Konto opprettet. Sjekk e-posten hvis bekreftelse er nødvendig.',required:'Skriv inn e-post og passord.'}};const SYNC_T={pl:{checking:'Sprawdzanie sesji...',saving:'Zapisywanie...',loading:'Pobieranie danych...',synced:'Dane zsynchronizowane',saveError:'Błąd zapisu',syncError:'Błąd synchronizacji'},en:{checking:'Checking session...',saving:'Saving...',loading:'Downloading data...',synced:'Data synchronized',saveError:'Save error',syncError:'Synchronization error'},no:{checking:'Sjekker økten...',saving:'Lagrer...',loading:'Henter data...',synced:'Data synkronisert',saveError:'Lagringsfeil',syncError:'Synkroniseringsfeil'}};let cloudState='checking',cloudDetail='';function renderCloudStatus(){let x=SYNC_T[lang]||SYNC_T.pl;$('cloudStatus').textContent=(x[cloudState]||cloudState)+(cloudDetail?': '+cloudDetail:'')}function setCloudState(state,detail=''){cloudState=state;cloudDetail=detail;renderCloudStatus()}function period(s){let d=dte(s),y=d.getFullYear(),m=d.getMonth();if(d.getDate()<26){m--;if(m<0){m=11;y--}}return{key:`${y}-${pad(m+1)}`,a:new Date(y,m,26),b:new Date(y,m+1,25)}}function isoWeekKey(dateStr){let d=dte(dateStr),day=d.getDay()||7;d.setDate(d.getDate()+4-day);let y0=new Date(d.getFullYear(),0,1);return `${d.getFullYear()}-${pad(Math.ceil((((d-y0)/86400000)+1)/7))}`}
+function isWorkingEntry(e){return e&&e.date&&![0,6].includes(dte(e.date).getDay())&&!['vakt','timebank_use'].includes(e.type)}
+function isFifthWeekday(e){if(!isWorkingEntry(e))return false;let wk=isoWeekKey(e.date),days=[...new Set(data.filter(x=>isWorkingEntry(x)&&isoWeekKey(x.date)===wk).map(x=>x.date))].sort();return days.indexOf(e.date)===4}
+function calc(e){let s=round15(mins(e.start)),en=round15(mins(e.end));if(en<=s)en+=1440;let elapsed=en-s;if(e.type==='vakt')return{paid:0,r:0,f:0,h:0,t:0,b:0,t50:0,t100:0};if(e.type==='bonus'){let b=Math.max(180,elapsed);return{paid:b,r:0,f:0,h:0,t:0,b,t50:0,t100:0}}let bs=elapsed>=360?s+330:Infinity,be=elapsed>=360?s+360:Infinity;
+if(e.type==='shift10'&&![0,6].includes(dte(e.date).getDay())){let paidMinutes=[];for(let m=s;m<en;m++){if(m>=bs&&m<be)continue;paidMinutes.push(m)}if(isFifthWeekday(e)){let f=paidMinutes.length;return{paid:f,r:0,f,h:0,t:0,b:0,t50:0,t100:0}}let r=Math.min(570,paidMinutes.length),f=0,h=0;for(let i=570;i<paidMinutes.length;i++){let c=(paidMinutes[i]%1440+1440)%1440,night=c>=1260||c<360;night?h++:f++}return{paid:r+f+h,r,f,h,t:0,b:0,t50:0,t100:0}}
+let ordinary=0,sat50=0,h=0;for(let m=s;m<en;m++){if(m>=bs&&m<be)continue;let d=dte(e.date);d.setMinutes(d.getMinutes()+m-s);let day=d.getDay(),c=(m%1440+1440)%1440,night=c>=1260||c<360,sat=day===6,sun=day===0;if(e.type==='timebank'){if(sun||night||(sat&&c>=720))h++;else sat50++;continue}if(sun||night||(sat&&c>=720))h++;else if(sat&&c>=360&&c<720)sat50++;else ordinary++}if(e.type==='timebank'){let t=round15(sat50*1.5+h*2);return{paid:t,r:0,f:0,h:0,t,b:0,t50:sat50,t100:h}}let r=Math.min(450,ordinary),f=sat50+Math.max(0,ordinary-450);return{paid:r+f+h,r,f,h,t:0,b:0,t50:0,t100:0}}
+function periodMonthLabel(p){let locale=lang==='no'?'nb-NO':lang==='en'?'en-GB':'pl-PL',label=new Intl.DateTimeFormat(locale,{month:'long',year:'numeric'}).format(p.b);return label.charAt(0).toLocaleUpperCase(locale)+label.slice(1)}function makePeriods(){let cur=$('period').value||period(new Date().toISOString().slice(0,10)).key;$('period').innerHTML='';let n=new Date();for(let i=-24;i<=12;i++){let d=new Date(n.getFullYear(),n.getMonth()+i,26),p=period(`${d.getFullYear()}-${pad(d.getMonth()+1)}-26`);$('period').add(new Option(periodMonthLabel(p),p.key))}$('period').value=cur}
+function bankBalanceUntil(endDate){let earned=0,used=0;for(let e of data){if(e.date<=endDate){if(e.type==='timebank')earned+=calc(e).t;else if(e.type==='timebank_use')used+=Number(e.amountMinutes||0)}}return earned-used}
+function render(){let x=T[lang],selected=$('period').value,list=data.filter(e=>period(e.date).key===selected).sort((a,b)=>b.date.localeCompare(a.date)),r=0,f=0,h=0,vw=0,ve=0;$('entries').innerHTML='';for(let e of list){if(e.type==='timebank_use'){$('entries').insertAdjacentHTML('beforeend',`<article class="entry"><div class="entryHead"><span class="entryDate">${e.date.split('-').reverse().join('.')}</span><span>−${fmt(Number(e.amountMinutes||0))}</span></div><div class="entryTime">${x.tbUse}</div><div class="chips"><span class="chip tb">${x.coveredDays}: ${e.coveredDays||'—'}</span></div><div class="actions"><button class="delete" data-delete="${e.id}">🗑️ ${x.del}</button></div></article>`);continue}let c=calc(e),wk=[0,6].includes(dte(e.date).getDay());if(e.type==='vakt')wk?ve++:vw++;else{r+=c.r;f+=c.f;h+=c.h+c.b}let chips=e.type==='vakt'?`<span class="chip">${wk?x.ve:x.vw}</span>`:e.type==='bonus'?`<span class="chip p100">BONUS ${fmt(c.b)} → 100%</span>`:e.type==='timebank'?`<span class="chip tb">${x.tb} +${fmt(c.t)}</span><span class="chip p50">${fmt(c.t50)} ×1.5</span><span class="chip p100">${fmt(c.t100)} ×2</span>`:`${e.type==='shift10'?`<span class="chip">${x.shift10}</span>`:''}<span class="chip">${x.reg} ${fmt(c.r)}</span><span class="chip p50">50% ${fmt(c.f)}</span><span class="chip p100">100% ${fmt(c.h)}</span>`;$('entries').insertAdjacentHTML('beforeend',`<article class="entry"><div class="entryHead"><span class="entryDate">${e.date.split('-').reverse().join('.')}</span><span>${e.type==='vakt'?'':x.paid+' '+fmt(c.paid)}</span></div><div class="entryTime">${e.start}–${e.end}</div><div class="chips">${chips}</div>${e.note?`<p>${e.note}</p>`:''}<div class="actions"><button data-edit="${e.id}">✏️ ${x.edit}</button><button class="delete" data-delete="${e.id}">🗑️ ${x.del}</button></div></article>`)}if(!list.length)$('entries').innerHTML=`<div class="empty">${x.empty}</div>`;let opt=$('period').selectedOptions[0],periodEnd=opt?period(`${$('period').value}-26`).b:new Date();$('reg').textContent=fmt(r);$('p50').textContent=fmt(f);$('p100').textContent=fmt(h);$('tb').textContent=fmt(bankBalanceUntil(iso(periodEnd)));$('vw').textContent=vw;$('ve').textContent=ve}
+function translate(){let x=T[lang];$('appTitle').textContent=x.title;$('appSub').textContent=x.sub;$('lReg').textContent=x.reg;$('lTb').textContent=x.tb;$('lVw').textContent=x.vw;$('lVe').textContent=x.ve;$('historyTitle').textContent=x.history;$('addText').textContent=x.add;$('payText').textContent=x.payButton;$('modalTitle').textContent=x.add;$('dateLabel').textContent=x.date;$('today').textContent=x.today;$('yesterday').textContent=x.yesterday;$('fromLabel').textContent=x.from;$('toLabel').textContent=x.to;$('typeLabel').textContent=x.type;$('noteLabel').textContent=x.note;$('cancel').textContent=x.cancel;$('save').textContent=x.save;$('type').options[0].text=x.regular;$('type').options[1].text=x.tb;$('type').options[2].text=x.vakt;$('type').options[4].text=x.shift10;$('tbHint').textContent=x.tbHint;$('tbModalTitle').textContent=x.tbUse;$('tbDateLabel').textContent=x.deductDate;$('tbHoursLabel').textContent=x.hours;$('tbMinutesLabel').textContent=x.minutes;$('tbDaysLabel').textContent=x.coveredDays;$('tbCancel').textContent=x.cancel;$('tbSave').textContent=x.deduct;$('payTitle').textContent=x.payTitle;$('payPeriodLabel').textContent=x.payPeriod;$('rateLabel').textContent=x.rate;$('taxLabel').textContent=x.tax;$('grossLabel').textContent=x.gross;$('foodLabel').textContent=x.food;$('taxAmountLabel').textContent=x.taxAmount;$('netLabel').textContent=x.net;$('payCancel').textContent=x.cancel;$('paySave').textContent=x.savePay;$('payRules').textContent=(PAY_T[lang]||PAY_T.pl).rules;let a=AUTH_T[lang]||AUTH_T.pl;$('hoursAuthName').placeholder=a.name;$('hoursAuthPassword').placeholder=a.password;$('hoursLoginBtn').textContent=a.login;$('hoursRegisterBtn').textContent=a.register;$('loginOrText').textContent=a.or;$('backToLobby').textContent=a.back;document.querySelectorAll('[data-login-lang]').forEach(b=>b.classList.toggle('active',b.dataset.loginLang===lang));document.documentElement.lang=lang;document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('on',b.dataset.lang===lang));localStorage.setItem('vf-language',lang);makePeriods();renderCloudStatus();render();if($('payModal').classList.contains('open'))updatePayroll()}
+function persist(){localStorage.setItem(KEY,JSON.stringify(data));render();scheduleCloudSave()}function iso(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}function openForm(e){$('form').reset();$('editId').value=e?.id||'';$('date').value=e?.date||iso(new Date());$('start').value=e?.start||'';$('end').value=e?.end||'';$('type').value=e?.type||'regular';$('note').value=e?.note||'';$('entryModal').classList.add('open')}function closeForm(){$('entryModal').classList.remove('open')}$('add').onclick=()=>openForm();$('cancel').onclick=closeForm;$('entryModal').onclick=e=>{if(e.target===$('entryModal'))closeForm()};$('today').onclick=()=>$('date').value=iso(new Date());$('yesterday').onclick=()=>{let d=new Date();d.setDate(d.getDate()-1);$('date').value=iso(d)};document.querySelectorAll('[data-start]').forEach(b=>b.onclick=()=>$('start').value=b.dataset.start);$('form').onsubmit=e=>{e.preventDefault();let o={id:$('editId').value||Date.now()+'',date:$('date').value,start:$('start').value,end:$('end').value,type:$('type').value,note:$('note').value.trim()},i=data.findIndex(v=>v.id===o.id);i<0?data.push(o):data[i]=o;$('period').value=period(o.date).key;persist();closeForm()};$('entries').onclick=e=>{let id=e.target.dataset.edit||e.target.dataset.delete;if(!id)return;if(e.target.dataset.delete){if(confirm(T[lang].del+'?')){data=data.filter(v=>v.id!==id);persist()}}else{let item=data.find(v=>v.id===id);if(item&&item.type!=='timebank_use')openForm(item)}};$('period').onchange=render;$('prev').onclick=()=>{if($('period').selectedIndex){$('period').selectedIndex--;render()}};$('next').onclick=()=>{if($('period').selectedIndex<$('period').options.length-1){$('period').selectedIndex++;render()}};document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{lang=b.dataset.lang;localStorage.setItem('vf-language',lang);scheduleCloudSave();translate()});
+const PAY_KEY='work_hours_pay_settings_v1';let paySettings={rate:0,tax:0};try{let saved=JSON.parse(localStorage.getItem(PAY_KEY)||'{}');if(saved&&typeof saved.rate==='number')paySettings={rate:saved.rate||0,tax:saved.tax||0};else{let latest=Object.values(saved||{}).find(v=>v&&typeof v==='object'&&(v.rate!==undefined||v.tax!==undefined));if(latest)paySettings={rate:Number(latest.rate||0),tax:Number(latest.tax||0)}}}catch(e){paySettings={rate:0,tax:0}}function money(v){return new Intl.NumberFormat(lang==='no'?'nb-NO':lang==='en'?'en-GB':'pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2}).format(v)+' NOK'}function payrollFor(periodKey,rate,taxPct){let list=data.filter(e=>period(e.date).key===periodKey),r=0,f=0,h=0,vw=0,ve=0,workDays=new Set();for(let e of list){if(e.type==='timebank_use')continue;let c=calc(e),wk=[0,6].includes(dte(e.date).getDay());if(e.type==='vakt'){wk?ve++:vw++;continue}if(['regular','bonus','shift10'].includes(e.type)){r+=c.r;f+=c.f;h+=c.h+c.b;workDays.add(e.date)}else if(e.type==='timebank'){workDays.add(e.date)}}let regularPay=r/60*rate,extra50=f/60*rate*1.5,extra100=h/60*rate*2,vaktPay=vw*400+ve*500,gross=regularPay+extra50+extra100+vaktPay,food=workDays.size*20,tax=gross*(taxPct/100),net=gross-tax-food;return{r,f,h,vw,ve,days:workDays.size,regularPay,extra50,extra100,vaktPay,gross,food,tax,net}}function fillPayPeriods(){let current=$('payPeriod').value||$('period').value;$('payPeriod').innerHTML='';for(let o of $('period').options)$('payPeriod').add(new Option(o.text,o.value));$('payPeriod').value=current}function loadPaySettings(){$('hourlyRate').value=paySettings.rate||'';$('taxRate').value=paySettings.tax||'';updatePayroll()}function updatePayroll(){let key=$('payPeriod').value,rate=Number($('hourlyRate').value||0),taxPct=Number($('taxRate').value||0),p=payrollFor(key,rate,taxPct);$('grossPay').textContent=money(p.gross);$('foodDeduction').textContent='−'+money(p.food);$('taxAmount').textContent='−'+money(p.tax);$('netPay').textContent=money(p.net);$('payBreakdown').textContent=`${fmt(p.r)} × ${money(rate)} · ${fmt(p.f)} × ${money(rate*1.5)} · ${fmt(p.h)} × ${money(rate*2)} · ${(PAY_T[lang]||PAY_T.pl).vakt} ${p.vw}×400 + ${p.ve}×500 · ${p.days} ${p.days===1?(PAY_T[lang]||PAY_T.pl).day:(PAY_T[lang]||PAY_T.pl).days} × 20 NOK`}function openPayModal(){fillPayPeriods();$('payPeriod').value=$('period').value;loadPaySettings();$('payModal').classList.add('open')}$('payBtn').onclick=openPayModal;$('payPeriod').onchange=loadPaySettings;$('hourlyRate').oninput=updatePayroll;$('taxRate').oninput=updatePayroll;$('payCancel').onclick=()=>$('payModal').classList.remove('open');$('payModal').onclick=e=>{if(e.target===$('payModal'))$('payModal').classList.remove('open')};$('payForm').onsubmit=e=>{e.preventDefault();paySettings={rate:Number($('hourlyRate').value||0),tax:Number($('taxRate').value||0)};localStorage.setItem(PAY_KEY,JSON.stringify(paySettings));scheduleCloudSave();updatePayroll();$('payModal').classList.remove('open')};
+function currentBankBalance(){let opt=$('period').selectedOptions[0],end=opt?period(`${$('period').value}-26`).b:new Date();return bankBalanceUntil(iso(end))}function openTbModal(){let x=T[lang],balance=currentBankBalance();$('tbUseDate').value=iso(new Date());$('tbUseHours').value='7';$('tbUseMinutes').value='30';$('tbCoveredDays').value='';$('tbBalanceText').textContent=`${x.balance}: ${fmt(balance)}`;$('tbModal').classList.add('open')}$('timeBankCard').onclick=openTbModal;$('tbCancel').onclick=()=>$('tbModal').classList.remove('open');$('tbModal').onclick=e=>{if(e.target===$('tbModal'))$('tbModal').classList.remove('open')};$('tbForm').onsubmit=e=>{e.preventDefault();let amount=Number($('tbUseHours').value||0)*60+Number($('tbUseMinutes').value||0),balance=currentBankBalance();if(amount<=0){alert('Wpisz liczbę godzin do odjęcia.');return}if(amount>balance){alert(`Brak wystarczających godzin. Dostępne saldo: ${fmt(balance)}`);return}data.push({id:'tbuse_'+Date.now(),type:'timebank_use',date:$('tbUseDate').value,amountMinutes:amount,coveredDays:$('tbCoveredDays').value.trim()});persist();$('tbModal').classList.remove('open')};
+function exportExcel(){
+ const key=$('period').value;
+ const list=data.filter(e=>period(e.date).key===key).sort((a,b)=>a.date.localeCompare(b.date));
+ const rate=Number(paySettings.rate||0),taxPct=Number(paySettings.tax||0),pay=payrollFor(key,rate,taxPct);
+ const detailRows=[];
+ for(const e of list){
+   if(e.type==='timebank_use'){
+     detailRows.push({'Date':e.date,'From':'','To':'','Type':'Time Bank Used','Paid Hours':0,'Regular Hours':0,'50% Hours':0,'100% Hours':0,'Time Bank Earned':0,'Time Bank Used':Number(e.amountMinutes||0)/60,'On Call':'','Note':e.coveredDays||''});
+     continue;
+   }
+   const c=calc(e),weekend=[0,6].includes(dte(e.date).getDay());
+   const entryType=e.type==='regular'?'Regular Hours':e.type==='timebank'?'Time Bank':e.type==='vakt'?'On Call':e.type==='bonus'?'BONUS':'10-hour Shift';
+   detailRows.push({'Date':e.date,'From':e.start,'To':e.end,'Type':entryType,'Paid Hours':e.type==='vakt'?0:c.paid/60,'Regular Hours':c.r/60,'50% Hours':c.f/60,'100% Hours':(c.h+c.b)/60,'Time Bank Earned':c.t/60,'Time Bank Used':0,'On Call':e.type==='vakt'?(weekend?'Weekend':'Weekday'):'','Note':e.note||''});
+ }
+ if(!detailRows.length)detailRows.push({'Date':'','From':'','To':'','Type':'No entries','Paid Hours':0,'Regular Hours':0,'50% Hours':0,'100% Hours':0,'Time Bank Earned':0,'Time Bank Used':0,'On Call':'','Note':''});
+ const summaryRows=[
+   {'Payroll Summary':'Payroll Period','Value':$('period').selectedOptions[0]?.text||key},
+   {'Payroll Summary':'Hourly Rate (NOK)','Value':rate},
+   {'Payroll Summary':'Tax Rate (%)','Value':taxPct},
+   {'Payroll Summary':'Regular Hours','Value':pay.r/60},
+   {'Payroll Summary':'50% Hours','Value':pay.f/60},
+   {'Payroll Summary':'100% Hours','Value':pay.h/60},
+   {'Payroll Summary':'Weekday On Call','Value':pay.vw},
+   {'Payroll Summary':'Weekend On Call','Value':pay.ve},
+   {'Payroll Summary':'Gross Pay (NOK)','Value':pay.gross},
+   {'Payroll Summary':'Food Deduction (NOK)','Value':pay.food},
+   {'Payroll Summary':'Tax (NOK)','Value':pay.tax},
+   {'Payroll Summary':'Net Pay (NOK)','Value':pay.net}
+ ];
+ const wb=XLSX.utils.book_new();
+ const wsDetails=XLSX.utils.json_to_sheet(detailRows);
+ const wsSummary=XLSX.utils.json_to_sheet(summaryRows);
+ wsDetails['!cols']=[{wch:12},{wch:8},{wch:8},{wch:18},{wch:13},{wch:14},{wch:11},{wch:12},{wch:18},{wch:16},{wch:12},{wch:30}];
+ wsSummary['!cols']=[{wch:27},{wch:18}];
+ wsDetails['!autofilter']={ref:wsDetails['!ref']};
+ wsDetails['!freeze']={xSplit:0,ySplit:1,topLeftCell:'A2',activePane:'bottomLeft',state:'frozen'};
+ wsSummary['!freeze']={xSplit:0,ySplit:1,topLeftCell:'A2',activePane:'bottomLeft',state:'frozen'};
+ XLSX.utils.book_append_sheet(wb,wsDetails,'Work Hours');
+ XLSX.utils.book_append_sheet(wb,wsSummary,'Payroll Summary');
+ XLSX.writeFile(wb,`Work_Hours_${key}.xlsx`,{compression:true});
+}
+$('quickExcel').onclick=exportExcel;function setCloudStatus(t){if(t==='Zapisywanie...')return setCloudState('saving');if(t==='Pobieranie danych...')return setCloudState('loading');if(t==='Dane zsynchronizowane')return setCloudState('synced');if(t.startsWith('Błąd zapisu: '))return setCloudState('saveError',t.slice(13));if(t.startsWith('Błąd synchronizacji: '))return setCloudState('syncError',t.slice(21));setCloudState('checking')}function scheduleCloudSave(){if(!cloudReady||!currentUser)return;clearTimeout(syncTimer);setCloudStatus('Zapisywanie...');syncTimer=setTimeout(saveCloudState,500)}async function saveCloudState(){if(!currentUser)return;let payload={user_id:currentUser.id,entries:data,pay_settings:paySettings,language:lang,updated_at:new Date().toISOString()};let{error}=await db.from('hours_user_data').upsert(payload,{onConflict:'user_id'});setCloudStatus(error?'Błąd zapisu: '+error.message:'Dane zsynchronizowane')}async function loadCloudState(){setCloudStatus('Pobieranie danych...');let{data:row,error}=await db.from('hours_user_data').select('entries,pay_settings,language').eq('user_id',currentUser.id).maybeSingle();if(error){setCloudStatus('Błąd synchronizacji: '+error.message);return}if(row){data=Array.isArray(row.entries)?row.entries:[];{let cloudPay=row.pay_settings||{};if(cloudPay&&typeof cloudPay.rate==='number')paySettings={rate:Number(cloudPay.rate||0),tax:Number(cloudPay.tax||0)};else{let legacyPay=Object.values(cloudPay).find(v=>v&&typeof v==='object'&&(v.rate!==undefined||v.tax!==undefined));paySettings=legacyPay?{rate:Number(legacyPay.rate||0),tax:Number(legacyPay.tax||0)}:{rate:0,tax:0}}}lang=(new URLSearchParams(location.search).get('lang')||localStorage.getItem('vf-language')||lang)}else{data=legacyData;await saveCloudState()}localStorage.setItem(KEY,JSON.stringify(data));localStorage.setItem(PAY_KEY,JSON.stringify(paySettings));cloudReady=true;makePeriods();translate();setCloudStatus('Dane zsynchronizowane')}function lobbyUrl(){let ref=document.referrer;try{if(ref&&new URL(ref).origin===location.origin)return ref}catch(e){}return new URL('../',location.href).href}function applyHoursAccess(user){let hoursOnly=user?.user_metadata?.hours_only===true;document.body.dataset.accountType=hoursOnly?'hours':'lobby';$('homeLobbyBtn').style.display=hoursOnly?'none':'';document.querySelector('.langs').style.display=hoursOnly?'flex':'';return hoursOnly}$('backToLobby').onclick=()=>{if(window.parent!==window){window.parent.postMessage('vf-open-lobby',location.origin)}else location.href=lobbyUrl()};$('homeLobbyBtn').onclick=()=>{if(currentUser?.user_metadata?.hours_only===true)return;$('backToLobby').onclick()};async function useLobbySession(){let{data:{session},error}=await db.auth.getSession();if(error||!session){$('sessionMessage').textContent=(AUTH_T[lang]||AUTH_T.pl).noSession;$('sessionGate').classList.remove('hidden');return}currentUser=session.user;applyHoursAccess(currentUser);$('cloudUser').textContent=currentUser.email||'Użytkownik';$('sessionGate').classList.add('hidden');await loadCloudState()}document.querySelectorAll('[data-login-lang]').forEach(b=>b.addEventListener('click',()=>{lang=b.dataset.loginLang;localStorage.setItem('vf-language',lang);translate();$('sessionMessage').textContent=(AUTH_T[lang]||AUTH_T.pl).noSession}));$('hoursAuthForm').onsubmit=async e=>{e.preventDefault();let email=$('hoursAuthEmail').value.trim(),password=$('hoursAuthPassword').value;if(!email||!password){$('sessionMessage').textContent=(AUTH_T[lang]||AUTH_T.pl).required;return}$('hoursLoginBtn').disabled=true;let{data:loginData,error}=await db.auth.signInWithPassword({email,password});$('hoursLoginBtn').disabled=false;if(error){$('sessionMessage').textContent=error.message;return}currentUser=loginData.user;applyHoursAccess(currentUser);$('cloudUser').textContent=currentUser.email||'User';$('sessionGate').classList.add('hidden');await loadCloudState()};$('hoursRegisterBtn').onclick=async()=>{let email=$('hoursAuthEmail').value.trim(),password=$('hoursAuthPassword').value,name=$('hoursAuthName').value.trim();if(!email||!password){$('sessionMessage').textContent=(AUTH_T[lang]||AUTH_T.pl).required;return}$('hoursRegisterBtn').disabled=true;let{data:signupData,error}=await db.auth.signUp({email,password,options:{data:{full_name:name,hours_only:true,account_type:'Hours',role:'Hours'}}});$('hoursRegisterBtn').disabled=false;if(error){$('sessionMessage').textContent=error.message;return}$('sessionMessage').textContent=(AUTH_T[lang]||AUTH_T.pl).created;if(signupData.session&&signupData.user){currentUser=signupData.user;applyHoursAccess(currentUser);$('cloudUser').textContent=currentUser.email||'User';$('sessionGate').classList.add('hidden');await loadCloudState()}};db.auth.onAuthStateChange(async(event,session)=>{if(event==='SIGNED_OUT'||!session){currentUser=null;cloudReady=false;$('sessionMessage').textContent='Sesja wygasła. Wróć do lobby i zaloguj się ponownie.';$('sessionGate').classList.remove('hidden')}else if(!currentUser||currentUser.id!==session.user.id){currentUser=session.user;applyHoursAccess(currentUser);$('cloudUser').textContent=currentUser.email||'Użytkownik';$('sessionGate').classList.add('hidden');await loadCloudState()}});window.addEventListener('message',e=>{if(e.origin===location.origin&&e.data?.type==='vf-language'&&['pl','en','no'].includes(e.data.language)){lang=e.data.language;localStorage.setItem('vf-language',lang);translate()}});window.addEventListener('storage',e=>{if(e.key==='vf-language'&&e.newValue&&['pl','en','no'].includes(e.newValue)){lang=e.newValue;translate()}});let swipeX=0,swipeY=0,swipeEdge=false;document.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;let t=e.touches[0];swipeEdge=t.clientX<=28;swipeX=t.clientX;swipeY=t.clientY},{passive:true});document.addEventListener('touchend',e=>{if(!swipeEdge)return;let t=e.changedTouches[0],dx=t.clientX-swipeX,dy=Math.abs(t.clientY-swipeY);swipeEdge=false;if(dx>=85&&dx>dy*1.35&&!document.querySelector('.modal.open')){if(window.parent!==window)window.parent.postMessage({type:'vf-open-lobby'},location.origin);else history.back()}},{passive:true});if(window.parent!==window)window.parent.postMessage({type:'vf-language-request'},location.origin);makePeriods();translate();useLobbySession();
+</script></body></html>

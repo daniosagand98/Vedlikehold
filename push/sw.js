@@ -13,7 +13,7 @@ self.addEventListener('notificationclick',e=>{
   e.waitUntil((async()=>{
     const list=await self.clients.matchAll({type:'window',includeUncontrolled:true});
     const home=new URL('../',self.registration.scope).href;
-    for(const c of list){if(c.url.startsWith(home)&&'focus' in c)return c.focus()}
+    for(const c of list){if(c.url.startsWith(home)&&'focus' in c){try{if(/[?&]chat=1/.test(target))c.postMessage({type:'open-chat'})}catch(x){}return c.focus()}}
     return self.clients.openWindow(target);
   })());
 });

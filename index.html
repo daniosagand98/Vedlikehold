@@ -89,7 +89,7 @@ body:before{content:"";position:fixed;z-index:10000;left:0;right:0;top:0;height:
 .bugCard{padding:13px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.035)}.bugCard h4{margin:0 0 5px}.bugMeta{font-size:12px;color:var(--muted);margin-bottom:8px}.bugText{white-space:pre-wrap;overflow-wrap:anywhere}.bugCard select{width:100%;margin-top:10px;padding:9px;border:1px solid var(--line);border-radius:10px;background:#07111f;color:#fff}.accountNameEdit{display:grid;grid-template-columns:1fr auto;gap:7px;margin-top:10px}.accountNameEdit input{min-width:0;padding:9px;border:1px solid var(--line);border-radius:10px;background:#07111f;color:#fff}.accountNameEdit button{padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:rgba(59,130,246,.12);color:#dbeafe;font-weight:750}
 
 /* LOBBY V3: WORK ORDERS, MAINTENANCE AND BUG ACTIONS */
-.formSelect,.formInput,.formText{width:100%;margin-top:9px;padding:11px;border:1px solid var(--line);border-radius:11px;background:#07111f;color:#fff}.formText{min-height:120px;resize:vertical}.inlineActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.inlineActions button{padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:rgba(59,130,246,.12);color:#dbeafe;font-weight:800}.inlineActions .danger{color:#fca5a5;background:rgba(239,68,68,.08)}.maintenanceRow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.035)}.maintenanceRows{display:grid;gap:9px;margin-top:14px}.switch{width:50px;height:28px}.workPanel{position:fixed;inset:0;z-index:170;display:none;padding:calc(18px + env(safe-area-inset-top)) 16px calc(18px + env(safe-area-inset-bottom));background:rgba(2,8,16,.9);overflow:auto}.workPanel.open{display:flex;align-items:flex-start;justify-content:center}.workSheet{width:min(850px,100%);padding:20px;border:1px solid var(--line);border-radius:24px;background:#0d1d31;box-shadow:var(--shadow)}.workTabs{display:flex;gap:8px;margin:14px 0}.workTabs button{flex:1;padding:11px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.05);color:#fff;font-weight:800}.workList{display:grid;gap:12px}.workCard{padding:14px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.035)}.workCard img{width:100%;max-height:320px;object-fit:contain;border-radius:12px;background:#07111f;margin-top:10px}.publicRequest{width:100%;margin-top:12px;padding:11px;border:1px solid #3b82f6;border-radius:12px;background:rgba(59,130,246,.12);color:#dbeafe;font-weight:850}.module.disabledModule{opacity:1;border:2px solid #ef4444!important;background:linear-gradient(155deg,rgba(90,18,18,.96),rgba(35,12,18,.98))!important;box-shadow:0 0 0 3px rgba(239,68,68,.12)!important}.module.disabledModule .action{color:#fecaca!important;border-color:#ef4444!important}.module.disabledModule:before{content:"ZABLOKOWANY";position:absolute;right:16px;top:16px;padding:5px 9px;border-radius:999px;background:#ef4444;color:white;font-size:10px;font-weight:900;letter-spacing:.05em}.bugModule{display:inline-block;padding:3px 8px;border-radius:999px;background:rgba(59,130,246,.15);color:#93c5fd;font-size:11px;font-weight:800;margin-bottom:7px}
+.formSelect,.formInput,.formText{width:100%;margin-top:9px;padding:11px;border:1px solid var(--line);border-radius:11px;background:#07111f;color:#fff}.formText{min-height:120px;resize:vertical}.inlineActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.workCard .inlineActions{flex-wrap:nowrap;gap:6px}.workCard .inlineActions button{flex:1 1 0;min-width:0;padding:9px 4px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}@media(max-width:400px){.workCard .inlineActions button{font-size:12px;padding:9px 2px}}.inlineActions button{padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:rgba(59,130,246,.12);color:#dbeafe;font-weight:800}.inlineActions .danger{color:#fca5a5;background:rgba(239,68,68,.08)}.maintenanceRow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.035)}.maintenanceRows{display:grid;gap:9px;margin-top:14px}.switch{width:50px;height:28px}.workPanel{position:fixed;inset:0;z-index:170;display:none;padding:calc(18px + env(safe-area-inset-top)) 16px calc(18px + env(safe-area-inset-bottom));background:rgba(2,8,16,.9);overflow:auto}.workPanel.open{display:flex;align-items:flex-start;justify-content:center}.workSheet{width:min(850px,100%);padding:20px;border:1px solid var(--line);border-radius:24px;background:#0d1d31;box-shadow:var(--shadow)}.workTabs{display:flex;gap:8px;margin:14px 0}.workTabs button{flex:1;padding:11px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.05);color:#fff;font-weight:800}.workList{display:grid;gap:12px}.workCard{padding:14px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.035)}.workCard img{width:100%;max-height:320px;object-fit:contain;border-radius:12px;background:#07111f;margin-top:10px}.publicRequest{width:100%;margin-top:12px;padding:11px;border:1px solid #3b82f6;border-radius:12px;background:rgba(59,130,246,.12);color:#dbeafe;font-weight:850}.module.disabledModule{opacity:1;border:2px solid #ef4444!important;background:linear-gradient(155deg,rgba(90,18,18,.96),rgba(35,12,18,.98))!important;box-shadow:0 0 0 3px rgba(239,68,68,.12)!important}.module.disabledModule .action{color:#fecaca!important;border-color:#ef4444!important}.module.disabledModule:before{content:"ZABLOKOWANY";position:absolute;right:16px;top:16px;padding:5px 9px;border-radius:999px;background:#ef4444;color:white;font-size:10px;font-weight:900;letter-spacing:.05em}.bugModule{display:inline-block;padding:3px 8px;border-radius:999px;background:rgba(59,130,246,.15);color:#93c5fd;font-size:11px;font-weight:800;margin-bottom:7px}
 
 /* REQUESTED LOBBY UPDATES */
 html,body,.moduleViewer{overscroll-behavior:none!important}.quickGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:18px 0}.quickCard{padding:14px;text-align:left;color:var(--text);font:inherit;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.045)}.quickCard b{display:block;font-size:23px;color:#93c5fd}.quickCard span{display:block;color:#c2cfdd;font-size:12px}.quickPrimary{background:rgba(255,255,255,.045)}.quickAction{cursor:pointer}.quickAction:hover{border-color:rgba(96,165,250,.45);background:rgba(59,130,246,.12)}.storageBar{height:12px;margin:13px 0;border-radius:999px;overflow:hidden;background:#07111f}.storageBar i{display:block;width:0;height:100%;background:linear-gradient(90deg,#2563eb,#38bdf8);transition:width .25s}.hoursOnly .module:not([data-module-key="hours"]),.hoursOnly .head,.hoursOnly .hero,.hoursOnly .appFooter{display:none!important}@media(max-width:700px){.quickGrid{grid-template-columns:1fr 1fr}}
@@ -133,7 +133,7 @@ html,body,.moduleViewer{overscroll-behavior:none!important}.quickGrid{display:gr
 <button class="module green" data-module-key="strapex" data-url="./strapex/" type="button"><div class="icon">🔧</div><h4 data-t="strapexTitle">Strapex Control</h4><p data-t="strapexDesc">Status urządzeń, produkcja, serwis, naprawy i historia.</p><span class="action" data-t="open">OTWÓRZ →</span></button>
 <button class="module" data-module-key="parts" data-url="./parts/" type="button"><div class="icon">📦</div><h4 data-t="partsTitle">Części</h4><p data-t="partsDesc">Magazyn części, zamówienia, dostawcy i stany minimalne.</p><span class="action" data-t="open">OTWÓRZ →</span></button>
 </section>
-<footer class="appFooter">Vedlikehold Viking Fjord v1.6.8<br>Created and designed by: <a href="https://dwsystem.eu" target="_blank" rel="noopener">DWSystem</a><br><span id="lobbyLastUpdate">—</span></footer>
+<footer class="appFooter">Vedlikehold Viking Fjord v1.7.4<br>Created and designed by: <a href="https://dwsystem.eu" target="_blank" rel="noopener">DWSystem</a><br><span id="lobbyLastUpdate">—</span></footer>
 </main>
 <section id="adminPanel" class="adminPanel"><div class="adminSheet"><div class="adminHead"><h2 data-t="users">Użytkownicy</h2><button id="closeAdmin" class="closeAdmin" type="button">✕</button></div><p id="adminStatus" class="adminStatus"></p><div id="usersList" class="usersList"></div></div></section><section id="settingsPanel" class="settingsPanel" aria-label="Ustawienia"><div class="settingsSheet"><div class="settingsHead"><h2 data-t="settings">Ustawienia</h2><button id="closeSettings" class="settingsClose" type="button">✕</button></div><div id="settingsHome" class="settingsHome"><button id="openBackupSettings" class="settingsTile" type="button">📂 <span id="backupMenuText">Kopia zapasowa</span></button><button id="openStorageSettings" class="settingsTile" type="button">☁️ <span id="storageMenuText">Pamięć zdjęć</span></button><button id="openAccountsSettings" class="settingsTile" type="button">👥 <span id="accountsMenuText">Konta</span></button><button id="openPhoneSettings" class="settingsTile" type="button">📞 <span id="phoneMenuText">Mój numer telefonu</span></button><button id="openBugsSettings" class="settingsTile" type="button">🐞 <span id="bugsMenuText">Błędy</span></button><button id="openModulesSettings" class="settingsTile" type="button">🧰 Moduły</button><button id="openLogsSettings" class="settingsTile" type="button">📜 Logi użytkowników</button><button id="openActivitySettings" class="settingsTile" type="button">🟢 Aktywność</button></div><section id="phoneSettingsView" class="settingsView"><button class="settingsBack" id="phoneBack" type="button">← <span id="phoneBackText">Wróć</span></button><h3 id="phoneTitle">📞 Mój numer telefonu</h3><div class="backupCard accountCreate"><p id="phoneHint" class="backupLast"></p><div class="accountGrid"><input id="phoneInput" type="tel" inputmode="tel" autocomplete="tel" placeholder="+47 000 00 000"></div><button id="phoneSave" type="button">Zapisz</button></div><div id="phoneStatus" class="settingsStatus"></div></section><section id="storageSettingsView" class="settingsView"><button class="settingsBack" data-settings-back type="button">← <span id="storageBackText">Wróć</span></button><h3 id="storageTitle">☁️ Pamięć zdjęć zgłoszeń</h3><div class="backupCard"><div class="backupRowHead"><b id="storageUsedLabel">Wykorzystano</b><span id="storagePercent" class="backupDate fresh">0%</span></div><div class="storageBar"><i id="storageBarFill"></i></div><p id="storageDetails" class="backupLast">—</p></div><div id="storageStatus" class="settingsStatus"></div></section><section id="backupSettingsView" class="settingsView"><button class="settingsBack" data-settings-back type="button">← <span id="backupBackText">Wróć</span></button><h3 id="backupTitle">📂 Kopia zapasowa</h3><div id="backupRows" class="backupRows"></div><div id="backupStatus" class="settingsStatus"></div></section><section id="accountsSettingsView" class="settingsView"><button class="settingsBack" data-settings-back type="button">← <span id="accountsBackText">Wróć</span></button><h3 id="accountsTitle">👥 Konta</h3><div class="accountCreate"><h3 id="addAccountTitle">➕ Dodaj konto</h3><div class="accountGrid"><input id="newAccountName" placeholder="Imię i nazwisko"><input id="newAccountEmail" type="email" placeholder="E-mail"><input id="newAccountPassword" type="password" placeholder="Hasło tymczasowe"><select id="newAccountRole"><option value="viewer">viewer</option><option value="hours">hours</option><option value="worker" selected>worker</option><option value="supervisor">supervisor</option><option value="admin">admin</option></select></div><button id="createAccountBtn" type="button">Dodaj konto</button></div><div id="accountsList" class="accountsList"></div><div id="accountsStatus" class="settingsStatus"></div></section><section id="modulesSettingsView" class="settingsView"><button class="settingsBack" data-settings-back type="button">← Wróć</button><h3>🧰 Dostępność modułów</h3><div id="maintenanceRows" class="maintenanceRows"></div><div id="modulesStatus" class="settingsStatus"></div></section><section id="bugsSettingsView" class="settingsView"><button class="settingsBack" data-settings-back type="button">← <span id="bugsBackText">Wróć</span></button><h3 id="bugsTitle">🐞 Błędy</h3><div id="bugsList" class="accountsList"></div><div id="bugsStatus" class="settingsStatus"></div></section><section id="logsSettingsView" class="settingsView"><button class="settingsBack" data-settings-back type="button">← Wróć</button><h3>📜 Logi użytkowników</h3><div class="accountGrid"><select id="logUserFilter" class="formSelect"><option value="">Wszyscy użytkownicy</option></select><select id="logActionFilter" class="formSelect"><option value="">Wszystkie czynności</option></select><select id="logModuleFilter" class="formSelect"><option value="">Wszystkie moduły</option></select><select id="logSort" class="formSelect"><option value="newest">Najnowsze</option><option value="oldest">Najstarsze</option><option value="user">Użytkownik A-Z</option><option value="action">Czynność A-Z</option></select></div><div id="logsList" class="accountsList"></div><div id="logsStatus" class="settingsStatus"></div></section><section id="activitySettingsView" class="settingsView"><button class="settingsBack" data-settings-back type="button">← Wróć</button><h3>🟢 Aktywność użytkowników</h3><p class="backupLast">Status online jest odświeżany podczas korzystania z Lobby. Historia zaczyna się zapisywać od tej wersji.</p><div id="activityList" class="accountsList"></div><div id="activityStatus" class="settingsStatus"></div></section></div></section><section id="bugReportPanel" class="settingsPanel"><div class="settingsSheet"><div class="settingsHead"><h2 id="bugReportTitle">Zgłoś błąd</h2><button id="closeBugReport" class="settingsClose" type="button">✕</button></div><div class="accountCreate"><select id="bugModuleInput" class="formSelect"><option>Lobby</option><option>Shift Plan</option><option>Hours</option><option>Strapex</option><option>Prace</option><option>Części</option><option>Inne</option></select><textarea id="bugDescriptionInput" placeholder="Opisz błąd" style="width:100%;min-height:130px;margin-top:9px;padding:11px;border:1px solid var(--line);border-radius:11px;background:#07111f;color:#fff"></textarea><button id="sendBugBtn" type="button">Wyślij zgłoszenie</button></div><div id="bugReportStatus" class="settingsStatus"></div></div></section><section id="passwordResetPanel" class="settingsPanel"><div class="settingsSheet"><div class="settingsHead"><h2 id="passwordResetTitle">Ustaw nowe hasło</h2><button id="closePasswordReset" class="settingsClose" type="button">✕</button></div><div class="accountCreate"><input id="newRecoveryPassword" type="password" placeholder="Nowe hasło"><button id="saveRecoveryPassword" type="button">Zapisz nowe hasło</button></div><div id="passwordResetStatus" class="settingsStatus"></div></div></section><section id="workPanel" class="workPanel"><div class="workSheet"><div class="settingsHead"><h2 id="workTitle">🛠️ Prace</h2><button id="closeWork" class="settingsClose" type="button">✕</button></div><div id="workTabs" class="workTabs"><button id="showOpenWorks" type="button">📋 Otwarte</button><button id="showWorkForm" class="workAddTab" type="button">➕ <span id="showWorkFormText">Dodaj</span></button><button id="showWorkHistory" type="button">✅ Zamknięte</button></div><section id="workForm"><input id="workReporter" class="formInput" placeholder="Imię zgłaszającego (opcjonalnie)"><input id="workTitleInput" class="formInput" placeholder="Co trzeba zrobić?"><select id="workLocation" class="formSelect"><option value="">Wybierz lokalizację</option><option>Kjol</option><option>Slakting</option><option>Pakking</option><option>Blogging</option><option>Office</option><option>Cantina</option><option>Kai</option><option>Workshop</option><option>Merd</option><option>Inne</option></select><textarea id="workDescription" class="formText" placeholder="Opis"></textarea><label id="workPhotoLabel" class="workUpload"><span class="workUploadIcon">🖼️</span><span id="workPhotoText">Wybierz zdjęcia z galerii</span><input id="workPhoto" type="file" accept="image/*" multiple></label><div id="workPhotoNames" class="workPhotoNames"></div><button id="submitWork" class="login-btn" type="button">Wyślij zgłoszenie</button><div id="workStatus" class="settingsStatus"></div></section><div id="workList" class="workList hidden"></div></div></section><section id="publicLinkPanel" class="publicLinkPanel" aria-label="Link publiczny"><div class="publicLinkSheet"><div class="settingsHead"><h2 id="publicLinkTitle">Link publiczny</h2><button id="closePublicLink" class="settingsClose" type="button">✕</button></div><p id="publicLinkDescription" class="backupLast">Skopiuj link do strony publicznej.</p><div class="publicLinkRow"><input id="publicLinkInput" type="text" readonly><button id="copyPublicLink" type="button">Kopiuj</button></div></div></section><section id="notificationPanel" class="settingsPanel"><div class="settingsSheet"><div class="settingsHead"><h2 id="notificationTitle">📢 Powiadomienia</h2><button id="closeNotifications" class="settingsClose" type="button">✕</button></div><div id="notificationList" class="accountsList"></div></div></section><section id="moduleViewer" class="moduleViewer" aria-label="Otwarty moduł"><button id="viewerBack" class="hidden" type="button" tabindex="-1" aria-hidden="true">Lobby</button><b id="viewerTitle" class="hidden">Moduł</b><button id="viewerReload" class="hidden" type="button" tabindex="-1" aria-hidden="true">Odśwież</button><iframe id="moduleFrame" title="Moduł"></iframe></section>
 <div id="toast" class="toast" role="status"></div>
@@ -592,12 +592,12 @@ const T={
 };
 const tr=()=>T[globalLang]||T.en,esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const FLAGS={pl:'🇵🇱',en:'🇬🇧',no:'🇳🇴'};
-let lastRefresh=new Date(),clockPainting=false,currentClock=null;
+let lastRefresh=new Date(),clockPainting=false,currentClock=null,clockLoaded=false,clockBusy=false;
 function flags(){document.querySelectorAll('[data-global-lang]').forEach(b=>{b.textContent=FLAGS[b.dataset.globalLang]||'🌐';b.setAttribute('aria-label',b.dataset.globalLang==='pl'?'Polski':b.dataset.globalLang==='en'?'English':'Norsk');b.title=b.getAttribute('aria-label')})}
 function footer(){let e=document.getElementById('lobbyLastUpdate');if(e)e.textContent=tr().updated+': '+lastRefresh.toLocaleTimeString(globalLang==='no'?'nb-NO':globalLang==='en'?'en-GB':'pl-PL',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}
 async function ownClock(){let r=await db.from('app_state').select('payload').eq('id',9).maybeSingle();if(r.error)throw r.error;let x=r.data?.payload||{active:{}};return{x,a:x.active?.[currentProfile?.id]||null}}
 function paintClock(a){currentClock=a||null;let t=tr(),card=document.getElementById('quickPartsCard'),q=document.getElementById('quickParts'),l=document.getElementById('quickPartsLabel');if(!card||!q||!l)return;clockPainting=true;card.classList.toggle('is-running',!!a);q.textContent=a?'■':'▶';l.innerHTML=a?`${t.stop}<span class="clockStartedAt" data-edit-clock="1">${t.startedAt}: ${new Date(a.started_at).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>`:t.start;card.title='';queueMicrotask(()=>clockPainting=false)}
-async function refreshClock(){if(!currentProfile)return;try{paintClock((await ownClock()).a)}catch(e){console.warn('Clock:',e)}}
+async function refreshClock(retry=true){if(!currentProfile||clockBusy)return;clockBusy=true;try{paintClock((await ownClock()).a);clockLoaded=true}catch(e){console.warn('Clock:',e);if(retry)setTimeout(()=>refreshClock(false),2500)}finally{clockBusy=false}}
 function translated(item){let x={...item},t=tr();if(x.target==='works')x.title=t.works;if(x.target==='hours'){x.title=t.hours;x.text=t.hoursText}if(x.target==='parts'){let m=String(x.text||'').match(/(-?\d+(?:[.,]\d+)?)\D+(-?\d+(?:[.,]\d+)?)/);if(m)x.text=`${t.stock}: ${m[1]} · ${t.minimum}: ${m[2]}`}return x}
 async function notifications(open=false){let list=[];try{list=(await collectDynamicNotifications()).map(translated)}catch(e){console.warn(e)}let t=tr(),q=document.getElementById('quickNotifications'),l=document.getElementById('quickNotificationsLabel'),h=document.getElementById('notificationTitle');if(q)q.textContent=list.length;if(l)l.textContent=list.length?t.notifications:t.none;if(h)h.textContent='📢 '+t.notifications;if(open){let box=document.getElementById('notificationList');if(box)box.innerHTML=list.length?list.map(x=>`<button class="settingsTile" data-notification-target="${esc(x.target||'')}" type="button">${esc(x.icon||'•')} <b>${esc(x.title||'')}</b><br><small>${esc(x.text||'')}</small></button>`).join(''):t.none;document.getElementById('notificationPanel')?.classList.add('open')}}
 window.renderDynamicNotifications=notifications;
@@ -608,7 +608,8 @@ document.getElementById('clockEditSave').onclick=async()=>{let t=tr();try{if(!in
 function language(){let t=tr();flags();footer();document.getElementById('clockEditTitle').textContent=t.editTitle;document.getElementById('clockEditHint').textContent=t.editHint;document.getElementById('clockEditCancel').textContent=t.cancel;document.getElementById('clockEditSave').textContent=t.save;paintClock(currentClock);notifications(false)}
 const oldLang=window.applyGlobalLanguage;window.applyGlobalLanguage=function(c,b=true){let r=oldLang(c,b);language();return r};
 let nc=document.getElementById('quickNotificationsCard');if(nc){let clone=nc.cloneNode(true);nc.replaceWith(clone);clone.onclick=()=>notifications(true)}
-const clockBox=document.getElementById('quickPartsCard');if(clockBox)new MutationObserver(()=>{if(!clockPainting&&currentProfile)setTimeout(()=>paintClock(currentClock),0)}).observe(clockBox,{subtree:true,childList:true,characterData:true});
+const clockBox=document.getElementById('quickPartsCard');if(clockBox)new MutationObserver(()=>{if(!clockPainting&&currentProfile){clearTimeout(window.__clkT);window.__clkT=setTimeout(()=>{if(clockLoaded)paintClock(currentClock);refreshClock()},150)}}).observe(clockBox,{subtree:true,childList:true,characterData:true});
+let clkTries=0;const clkIv=setInterval(()=>{if(++clkTries>60||clockLoaded)return clearInterval(clkIv);if(currentProfile)refreshClock()},1000);window.addEventListener('focus',()=>{if(currentProfile)refreshClock()});window.addEventListener('pageshow',()=>{if(currentProfile)refreshClock()});
 async function stableRefresh(){if(!currentProfile||document.hidden)return;await Promise.allSettled([loadQuickOverview(),notifications(false),refreshClock()]);lastRefresh=new Date();footer();setTimeout(()=>paintClock(currentClock),0)}
 setInterval(stableRefresh,60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)stableRefresh()});
 setTimeout(async()=>{flags();await refreshClock();language();lastRefresh=new Date();footer()},800);
@@ -766,7 +767,7 @@ html body .tomorrowVaktLine{margin-top:3px!important}
 (()=>{const T={hours:{pl:'Brak wpisu godzin',en:'Missing hours entry',no:'Mangler timeføring'},works:{pl:'Otwarte prace',en:'Open works',no:'Åpne arbeider'}};let list=[],idx=0;
 function show(){const el=document.getElementById('quickNotifLast');if(!el)return;if(!list.length){el.textContent='';return}
  if(idx>=list.length)idx=0;const x=list[idx],lang=(typeof globalLang!=='undefined'&&globalLang)||'pl';
- el.style.opacity=0;setTimeout(()=>{el.textContent=`${x.icon||'📢'} ${(T[x.target]&&T[x.target][lang])||x.title}${list.length>1?`  (${idx+1}/${list.length})`:''}`;el.style.opacity=1},180)}
+ el.style.opacity=0;setTimeout(()=>{el.textContent=`${x.icon||'📢'} ${(T[x.target]&&T[x.target][lang])||x.title}`;el.style.opacity=1},180)}
 async function load(){try{const card=document.getElementById('quickNotificationsCard');if(!card||typeof collectDynamicNotifications!=='function'||typeof currentProfile==='undefined'||!currentProfile)return;
  list=await collectDynamicNotifications();let el=document.getElementById('quickNotifLast');
  if(!el){el=document.createElement('span');el.id='quickNotifLast';el.style.transition='opacity .18s';card.appendChild(el)}
@@ -779,5 +780,246 @@ document.getElementById('quickNotificationsCard')?.addEventListener('click',()=>
 <style id="phone-greeting">#welcomeShort{display:none}.heroHead{display:block}
 @media(max-width:620px){.heroHead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:12px 0 10px}.heroHead h2{margin:0!important;font-size:22px!important}#welcomeShort{display:block;font-size:15px;font-weight:800;color:#c7d6e6;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}#welcome{display:none!important}}</style>
 <script id="phone-greeting-js">(()=>{const h=document.getElementById('quickTitle'),w=document.getElementById('welcome');if(!h||!w)return;const box=document.createElement('div');box.className='heroHead';h.parentNode.insertBefore(box,h);box.appendChild(h);const s=document.createElement('span');s.id='welcomeShort';box.appendChild(s);const upd=()=>{s.textContent=(w.textContent||'').split(/\.\s/)[0].replace(/\.$/,'')};upd();new MutationObserver(upd).observe(w,{childList:true,characterData:true,subtree:true})})();</script>
+<style id="chat-css">
+.hoursOnly .chatIconBtn{display:none!important}.chatIconBtn{position:absolute;left:0;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:16px;border:1px solid var(--line,#263a52);background:rgba(17,34,56,.75);color:#fff;font-size:24px;display:grid;place-items:center;cursor:pointer;padding:0;z-index:5}
+@media(min-width:900px){.chatIconBtn{width:56px;height:56px;font-size:26px}}
+.chatBadge{position:absolute;top:-7px;right:-7px;min-width:24px;height:24px;padding:0 7px;border-radius:999px;background:#ef4444;color:#fff;font-size:13px;font-weight:900;display:none;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(239,68,68,.45)}
+.chatBadge.on{display:inline-flex}
+.chatPanel{position:fixed;left:0;right:0;top:0;height:100dvh;z-index:175;display:none;flex-direction:column;background:#07111f}
+.chatPanel.open{display:flex}
+.chatHead,.chatBar,.chatRec{padding-left:max(12px,calc((100% - 860px)/2))!important;padding-right:max(12px,calc((100% - 860px)/2))!important}
+.chatHead{display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px;border-bottom:1px solid var(--line,#263a52);background:#0d1d31}
+.chatHead h2{margin:0;flex:1;font-size:20px;color:#fff}
+.chatHead button{border:1px solid var(--line,#263a52);background:rgba(255,255,255,.06);color:#fff;border-radius:12px;width:40px;height:40px;font-size:18px;cursor:pointer}
+.chatList{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:12px 12px 8px;display:flex;flex-direction:column;gap:6px;width:min(860px,100%);margin:0 auto;box-sizing:border-box}
+.chatEmpty{margin:auto;color:#8fa3ba;text-align:center;font-weight:700;padding:30px}
+.chatDay{align-self:center;margin:10px 0 4px;padding:4px 12px;border-radius:999px;background:rgba(255,255,255,.07);color:#9fb0c6;font-size:12px;font-weight:800}
+.chatMsg{max-width:min(82%,520px);padding:8px 11px 6px;border-radius:16px;border:1px solid var(--line,#263a52);background:#15253a;color:#eaf2fb;align-self:flex-start;word-break:break-word;overflow-wrap:anywhere}
+.chatMsg.mine{align-self:flex-end;background:linear-gradient(135deg,#1d4ed8,#2563eb);border-color:#3b82f6}
+.chatMsg.pending{opacity:.6}
+.chatName{display:block;font-size:12px;font-weight:900;margin-bottom:2px}
+.chatText{white-space:pre-wrap;font-size:15.5px;line-height:1.35}
+.chatMsg video.chatVid{display:block;max-width:100%;max-height:320px;border-radius:12px;margin:2px 0 4px;background:#000}
+.chatMsg img.chatImg{display:block;max-width:100%;max-height:300px;border-radius:12px;margin:2px 0 4px;cursor:zoom-in;background:#0b1626}
+.chatFoot{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 8px;margin-top:3px;font-size:11.5px;color:rgba(226,236,248,.72)}
+.chatSeen{flex-basis:100%;text-align:right;font-size:11.5px;color:#93c5fd;font-weight:700}
+.chatMsg.mine .chatSeen{color:#bfdbfe}
+.chatDel{border:0;background:transparent;color:inherit;opacity:.7;cursor:pointer;font-size:12px;padding:0 2px}
+.chatVm{display:flex;align-items:center;gap:10px;min-width:210px}
+.chatVm button{width:38px;height:38px;border-radius:50%;border:0;background:#fff;color:#1d4ed8;font-size:15px;font-weight:900;cursor:pointer;flex:none}
+.chatMsg:not(.mine) .chatVm button{background:#2563eb;color:#fff}
+.chatVm .bar{flex:1;height:6px;border-radius:99px;background:rgba(255,255,255,.28);overflow:hidden}
+.chatVm .bar i{display:block;height:100%;width:0;background:#fff;border-radius:99px}
+.chatVm .dur{font-size:12.5px;font-weight:800;min-width:34px;text-align:right}
+.chatRec{display:none;align-items:center;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line,#263a52);background:#0d1d31;color:#fff}
+.chatRec.on{display:flex}
+.chatRec .dot{width:12px;height:12px;border-radius:50%;background:#ef4444;animation:chatBlink 1s infinite}
+@keyframes chatBlink{50%{opacity:.25}}
+.chatRec .t{flex:1;font-weight:800;font-variant-numeric:tabular-nums}
+.chatRec button{border:0;border-radius:14px;height:44px;padding:0 16px;font-weight:900;font-size:15px;cursor:pointer}
+.chatRec .cancel{background:#334155;color:#fff}.chatRec .ok{background:#16a34a;color:#fff}
+.chatBar{display:flex;align-items:flex-end;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line,#263a52);background:#0d1d31;width:100%;box-sizing:border-box}
+.chatBar.cHide{display:none}
+.chatBar textarea{flex:1;min-height:44px;max-height:130px;resize:none;border:1px solid var(--line,#263a52);border-radius:22px;background:#07111f;color:#fff;padding:11px 16px;font:inherit;font-size:16px;outline:none;box-sizing:border-box}
+.chatBtn{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line,#263a52);background:rgba(255,255,255,.07);color:#fff;font-size:20px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.chatBtn.primary{background:linear-gradient(135deg,#2563eb,#38bdf8);border-color:transparent}
+.chatBtn.cHide{display:none}
+.chatToast{position:absolute;left:50%;bottom:96px;transform:translateX(-50%);max-width:90%;background:#fff;color:#102033;padding:11px 15px;border-radius:13px;font-weight:800;font-size:14px;box-shadow:0 8px 24px #0006;opacity:0;pointer-events:none;transition:.2s;z-index:5}.chatToast.on{opacity:1}
+.chatLightbox{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:14px}
+.chatLightbox.open{display:flex}.chatLightbox img{max-width:100%;max-height:100%;border-radius:10px}
+.chatLightbox button{position:absolute;top:calc(12px + env(safe-area-inset-top));right:14px;width:44px;height:44px;border-radius:50%;border:0;background:#fff3;color:#fff;font-size:20px}
+</style>
+<script id="chat-script">
+(()=>{'use strict';
+const TX={
+pl:{title:'Czat',desc:'Rozmowy zespołu, zdjęcia i wiadomości głosowe.',ph:'Napisz wiadomość…',empty:'Brak wiadomości. Napisz pierwszą!',today:'Dziś',yesterday:'Wczoraj',seen:'Wyświetlili',sent:'Wysłano',photo:'Zdjęcie',video:'Film',tooBig:'Film jest za duży (max 45 MB)',uploading:'Wysyłanie filmu…',voice:'Wiadomość głosowa',del:'Usuń',sure:'Na pewno?',rec:'Nagrywanie…',cancel:'Anuluj',send:'Wyślij',micDenied:'Brak dostępu do mikrofonu. Zezwól na mikrofon w ustawieniach przeglądarki.',micNo:'To urządzenie nie obsługuje nagrywania głosu.',tooShort:'Nagranie za krótkie',err:'Nie udało się wysłać',errLoad:'Nie udało się wczytać czatu (czy uruchomiono krok-czat.sql?)',newMsgs:n=>n===1?'1 nowa wiadomość':n+' nowych wiadomości',close:'Zamknij',back:'Wróć'},
+en:{title:'Chat',desc:'Team conversations, photos and voice messages.',ph:'Type a message…',empty:'No messages yet. Write the first one!',today:'Today',yesterday:'Yesterday',seen:'Seen by',sent:'Sent',photo:'Photo',video:'Video',tooBig:'Video is too large (max 45 MB)',uploading:'Uploading video…',voice:'Voice message',del:'Delete',sure:'Sure?',rec:'Recording…',cancel:'Cancel',send:'Send',micDenied:'Microphone access denied. Allow the microphone in your browser settings.',micNo:'This device does not support voice recording.',tooShort:'Recording too short',err:'Could not send',errLoad:'Could not load the chat (was krok-czat.sql run?)',newMsgs:n=>n===1?'1 new message':n+' new messages',close:'Close',back:'Back'},
+no:{title:'Chat',desc:'Samtaler i teamet, bilder og talemeldinger.',ph:'Skriv en melding…',empty:'Ingen meldinger ennå. Skriv den første!',today:'I dag',yesterday:'I går',seen:'Sett av',sent:'Sendt',photo:'Bilde',video:'Video',tooBig:'Videoen er for stor (maks 45 MB)',uploading:'Laster opp video…',voice:'Talemelding',del:'Slett',sure:'Sikker?',rec:'Tar opp…',cancel:'Avbryt',send:'Send',micDenied:'Ingen tilgang til mikrofon. Tillat mikrofon i nettleserinnstillingene.',micNo:'Denne enheten støtter ikke lydopptak.',tooShort:'Opptaket er for kort',err:'Kunne ikke sende',errLoad:'Kunne ikke laste chatten (er krok-czat.sql kjørt?)',newMsgs:n=>n===1?'1 ny melding':n+' nye meldinger',close:'Lukk',back:'Tilbake'}};
+const T=()=>TX[typeof globalLang!=='undefined'&&TX[globalLang]?globalLang:'en'];
+const LOC=()=>({pl:'pl-PL',en:'en-GB',no:'nb-NO'})[typeof globalLang!=='undefined'?globalLang:'en']||'en-GB';
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const me=()=>(typeof currentProfile!=='undefined'&&currentProfile)||null;
+const isMgr=()=>['admin','supervisor'].includes((me()?.role||'').toLowerCase());
+function say(m){if(open){let t=$('chatToast');if(!t){t=document.createElement('div');t.id='chatToast';t.className='chatToast';panel.appendChild(t)}t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),3500)}else if(typeof showMessage==='function')showMessage(m)}
+const BUCKET='chat-media',MAX_REC=180000;
+let msgs=[],reads=[],nodes=new Map(),lastDay='',open=false,loaded=false,chan=null,pollT=null,markT=0,sendingBusy=false,lastErr=0;
+
+/* ---------- ikona czatu w lewym górnym rogu lobby ---------- */
+const hdr=document.querySelector('header.top');
+let tile=null;
+if(hdr){tile=document.createElement('button');tile.type='button';tile.id='chatBtn';tile.className='chatIconBtn';tile.setAttribute('aria-label','Chat');
+ tile.innerHTML='💬<span class="chatBadge" id="chatBadge"></span>';hdr.appendChild(tile)}
+/* ---------- panel ---------- */
+const panel=document.createElement('section');panel.id='chatPanel';panel.className='chatPanel';panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');
+panel.innerHTML='<div class="chatHead"><button id="chatBack" type="button" aria-label="Back">←</button><h2 id="chatTitle"></h2><button id="chatClose" type="button" aria-label="Close">✕</button></div><div id="chatList" class="chatList"></div><div id="chatRec" class="chatRec"><span class="dot"></span><span class="t" id="chatRecT">0:00</span><button id="chatRecCancel" class="cancel" type="button"></button><button id="chatRecOk" class="ok" type="button"></button></div><form id="chatForm" class="chatBar" autocomplete="off"><label class="chatBtn" id="chatPhotoBtn" title="📷">📷<input id="chatPhoto" type="file" accept="image/*,video/*" multiple hidden></label><textarea id="chatInput" rows="1" enterkeyhint="send"></textarea><button id="chatMic" class="chatBtn" type="button" aria-label="Voice">🎤</button><button id="chatSend" class="chatBtn primary cHide" type="submit" aria-label="Send">➤</button></form>';
+document.body.appendChild(panel);
+const lb=document.createElement('div');lb.className='chatLightbox';lb.innerHTML='<button type="button" aria-label="Close">✕</button><img alt="">';document.body.appendChild(lb);
+lb.addEventListener('click',()=>lb.classList.remove('open'));
+
+function applyLang(){const t=T();
+ if(tile){tile.title=t.title;tile.setAttribute('aria-label',t.title)}
+ $('chatTitle').textContent='💬 '+t.title;$('chatInput').placeholder=t.ph;$('chatRecCancel').textContent=t.cancel;$('chatRecOk').textContent=t.send;
+ $('chatClose').title=t.close;$('chatBack').title=t.back;renderAll()}
+
+/* ---------- pomocnicze ---------- */
+const hue=s=>{let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))%360;return h};
+const fmtTime=iso=>new Date(iso).toLocaleTimeString(LOC(),{hour:'2-digit',minute:'2-digit'});
+function dayLabel(iso){const d=new Date(iso),n=new Date(),k=x=>x.getFullYear()+'-'+x.getMonth()+'-'+x.getDate(),y=new Date(n);y.setDate(n.getDate()-1);
+ if(k(d)===k(n))return T().today;if(k(d)===k(y))return T().yesterday;return d.toLocaleDateString(LOC(),{day:'numeric',month:'long',year:d.getFullYear()===n.getFullYear()?undefined:'numeric'})}
+const dayKey=iso=>{const d=new Date(iso);return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate()};
+const fmtDur=ms=>{const s=Math.max(0,Math.round((ms||0)/1000));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+function seenByAll(m){return reads.filter(r=>r.user_id!==m.user_id&&r.user_id!==me()?.id&&new Date(r.last_seen_at)>=new Date(m.created_at)).sort((a,b)=>new Date(a.last_seen_at)-new Date(b.last_seen_at))}
+
+/* ---------- rysowanie ---------- */
+function footHtml(m){const t=T(),mine=m.user_id===me()?.id,sb=seenByAll(m),canDel=mine||isMgr();
+ const tick=mine?(m.pending?'⏳':(sb.length?'✓✓':'✓')):'';
+ return `<span class="chatTime">${esc(fmtTime(m.created_at))}</span>${tick?`<span class="chatTick">${tick}</span>`:''}${canDel&&!m.pending?`<button class="chatDel" type="button" data-del="${esc(m.id)}" title="${esc(t.del)}">🗑</button>`:''}${sb.length?`<span class="chatSeen">👁 ${esc(t.seen)}: ${esc(sb.map(r=>r.user_name).join(', '))}</span>`:''}`}
+function buildNode(m){const mine=m.user_id===me()?.id,div=document.createElement('div');div.className='chatMsg'+(mine?' mine':'')+(m.pending?' pending':'');div.dataset.id=m.id;
+ let h='';if(!mine)h+=`<span class="chatName" style="color:hsl(${hue(m.sender_name)} 85% 72%)">${esc(m.sender_name)}</span>`;
+ if(m.kind==='image'&&m.media_url){h+=`<img class="chatImg" src="${esc(m.media_url)}" alt="" loading="lazy">`;if(m.body)h+=`<div class="chatText">${esc(m.body)}</div>`}
+ else if(m.kind==='video'&&m.media_url){h+=`<video class="chatVid" src="${esc(m.media_url)}#t=0.1" controls playsinline preload="metadata"></video>`;if(m.body)h+=`<div class="chatText">${esc(m.body)}</div>`}
+ else if(m.kind==='voice'&&m.media_url){h+=`<div class="chatVm"><button type="button" class="vmPlay" aria-label="Play">▶</button><div class="bar"><i></i></div><span class="dur">${fmtDur(m.duration_ms)}</span><audio preload="none" src="${esc(m.media_url)}"></audio></div>`}
+ else h+=`<div class="chatText">${esc(m.body)}</div>`;
+ h+=`<div class="chatFoot">${footHtml(m)}</div>`;div.innerHTML=h;
+ const img=div.querySelector('img.chatImg');if(img)img.addEventListener('click',()=>{lb.querySelector('img').src=m.media_url;lb.classList.add('open')});
+ const vm=div.querySelector('.chatVm');if(vm)wireVoice(vm,m);
+ return div}
+function wireVoice(vm,m){const a=vm.querySelector('audio'),btn=vm.querySelector('.vmPlay'),bar=vm.querySelector('.bar i'),dur=vm.querySelector('.dur');
+ const total=()=>(m.duration_ms||(isFinite(a.duration)?a.duration*1000:0))||1;
+ btn.addEventListener('click',()=>{if(a.paused){document.querySelectorAll('#chatList audio').forEach(x=>{if(x!==a)x.pause()});a.play().catch(()=>{})}else a.pause()});
+ a.addEventListener('play',()=>btn.textContent='⏸');a.addEventListener('pause',()=>btn.textContent='▶');
+ a.addEventListener('timeupdate',()=>{bar.style.width=Math.min(100,a.currentTime*1000/total()*100)+'%';dur.textContent=fmtDur(a.paused&&a.currentTime===0?m.duration_ms:a.currentTime*1000)});
+ a.addEventListener('ended',()=>{btn.textContent='▶';bar.style.width='0';dur.textContent=fmtDur(m.duration_ms)})}
+function appendNode(m){const list=$('chatList');const emp=list.querySelector('.chatEmpty');if(emp)emp.remove();
+ const k=dayKey(m.created_at);if(k!==lastDay){const d=document.createElement('div');d.className='chatDay';d.dataset.k=k;d.textContent=dayLabel(m.created_at);list.appendChild(d);lastDay=k}
+ const n=buildNode(m);list.appendChild(n);nodes.set(m.id,n);return n}
+function nearBottom(){const l=$('chatList');return l.scrollHeight-l.scrollTop-l.clientHeight<140}
+function toBottom(){const l=$('chatList');l.scrollTop=l.scrollHeight}
+function renderAll(){const list=$('chatList');if(!list)return;list.innerHTML='';nodes=new Map();lastDay='';
+ if(!msgs.length){list.innerHTML=`<div class="chatEmpty">${esc(T().empty)}</div>`;return}
+ msgs.forEach(appendNode);toBottom()}
+function refreshFoots(){nodes.forEach((n,id)=>{const m=msgs.find(x=>x.id===id);if(!m)return;const f=n.querySelector('.chatFoot');if(f)f.innerHTML=footHtml(m);n.classList.toggle('pending',!!m.pending)})}
+function addMsg(m,stick){if(msgs.some(x=>x.id===m.id)){const o=msgs.find(x=>x.id===m.id);Object.assign(o,m,{pending:false});refreshFoots();return}
+ const was=nearBottom()||stick;msgs.push(m);msgs.sort((a,b)=>new Date(a.created_at)-new Date(b.created_at));
+ if(open){if(msgs[msgs.length-1]===m){appendNode(m);if(was)toBottom()}else renderAll()}
+ updateBadge()}
+function removeMsg(id){const i=msgs.findIndex(x=>x.id===id);if(i<0)return;msgs.splice(i,1);const n=nodes.get(id);if(n)n.remove();nodes.delete(id);if(!msgs.length)renderAll();updateBadge()}
+
+/* ---------- nieprzeczytane ---------- */
+function unreadList(){const my=reads.find(r=>r.user_id===me()?.id);const since=my?new Date(my.last_seen_at):new Date(Date.now()-3*864e5);
+ return msgs.filter(m=>m.user_id!==me()?.id&&!m.pending&&new Date(m.created_at)>since)}
+function updateBadge(){const b=$('chatBadge');if(!b)return;const n=open?0:unreadList().length;b.textContent=n>99?'99+':String(n);b.classList.toggle('on',n>0)}
+
+/* ---------- dane ---------- */
+async function loadAll(){try{
+ const a=await db.from('chat_messages').select('*').order('created_at',{ascending:false}).limit(200);if(a.error)throw a.error;
+ const r=await db.from('chat_reads').select('user_id,user_name,last_seen_at');if(r.error)throw r.error;
+ reads=r.data||[];const fetched=(a.data||[]).slice().reverse();
+ if(!loaded){const pend=msgs.filter(m=>m.pending);msgs=fetched.concat(pend);loaded=true;if(open){renderAll();toBottom()}}
+ else{const ids=new Set(fetched.map(m=>m.id)),oldest=fetched.length?new Date(fetched[0].created_at):null;
+  fetched.forEach(m=>{if(!msgs.some(x=>x.id===m.id))addMsg(m)});
+  msgs.filter(x=>!x.pending&&!ids.has(x.id)&&oldest&&new Date(x.created_at)>=oldest).forEach(x=>removeMsg(x.id));
+  if(open)refreshFoots()}
+ updateBadge();return true}
+ catch(e){console.warn('Chat:',e.message||e);if(open&&Date.now()-lastErr>20000){lastErr=Date.now();say(T().errLoad)}return false}}
+async function loadReads(){try{const r=await db.from('chat_reads').select('user_id,user_name,last_seen_at');if(!r.error&&r.data){reads=r.data;if(open)refreshFoots();updateBadge()}}catch(e){}}
+async function markSeen(){if(!open||document.hidden||!me())return;if(Date.now()-markT<1500)return;markT=Date.now();
+ try{const r=await db.rpc('chat_mark_seen');if(!r.error){const iso=typeof r.data==='string'?r.data:new Date().toISOString();const mine=reads.find(x=>x.user_id===me().id);if(mine)mine.last_seen_at=iso;else reads.push({user_id:me().id,user_name:me().full_name||'',last_seen_at:iso});refreshFoots();updateBadge()}}catch(e){}}
+function subscribe(){if(chan||!db.channel)return;try{
+ chan=db.channel('vf-chat')
+  .on('postgres_changes',{event:'INSERT',schema:'public',table:'chat_messages'},p=>{const m=p.new;if(m){addMsg(m);if(open)markSeen()}})
+  .on('postgres_changes',{event:'DELETE',schema:'public',table:'chat_messages'},p=>{if(p.old?.id)removeMsg(p.old.id)})
+  .on('postgres_changes',{event:'*',schema:'public',table:'chat_reads'},()=>loadReads())
+  .subscribe()}catch(e){console.warn('Chat realtime:',e.message)}}
+function startPolling(){clearInterval(pollT);pollT=setInterval(async()=>{if(document.hidden||!me())return;if(open){const ok=await loadAll();if(ok)markSeen()}else{await loadAll()}},open?8000:40000)}
+
+/* ---------- wysyłanie ---------- */
+const uuid=()=>crypto.randomUUID?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==='x'?r:(r&3|8)).toString(16)});
+async function sendMsg(fields){const id=uuid(),m={id,created_at:new Date().toISOString(),user_id:me().id,sender_name:me().full_name||'',kind:'text',body:'',media_url:null,media_path:null,duration_ms:null,...fields,pending:true};
+ addMsg(m,true);
+ try{const row={id,kind:m.kind,body:m.body,media_url:m.media_url,media_path:m.media_path,duration_ms:m.duration_ms};
+  const r=await db.from('chat_messages').insert(row).select().single();if(r.error)throw r.error;
+  const cur=msgs.find(x=>x.id===id);if(cur){Object.assign(cur,r.data||{},{pending:false});const n=nodes.get(id);if(n){n.classList.remove('pending');n.querySelector('.chatFoot').innerHTML=footHtml(cur)}}
+  markSeen();return true}
+ catch(e){console.warn('Chat send:',e.message||e);removeMsg(id);say(T().err+': '+(e.message||''));return false}}
+async function uploadFile(path,blob,type){const r=await db.storage.from(BUCKET).upload(path,blob,{contentType:type,upsert:false});if(r.error)throw r.error;return db.storage.from(BUCKET).getPublicUrl(path).data.publicUrl}
+async function shrinkImage(file){try{const bmp=await createImageBitmap(file);const max=1600,sc=Math.min(1,max/Math.max(bmp.width,bmp.height)),w=Math.round(bmp.width*sc),h=Math.round(bmp.height*sc);
+ const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(bmp,0,0,w,h);
+ const blob=await new Promise(res=>c.toBlob(res,'image/jpeg',.82));if(blob)return blob}catch(e){}return file}
+async function sendPhotos(files){const cap=$('chatInput').value.trim();let first=true;
+ for(const f of files){if(/^video\//.test(f.type)||/\.(mp4|mov|m4v|webm|3gp)$/i.test(f.name||'')){if(f.size>45*1024*1024){say(T().tooBig);continue}try{const ext=((f.name||'').split('.').pop()||'mp4').toLowerCase().replace(/[^a-z0-9]/g,'')||'mp4',id=uuid(),path=`video/${id}.${ext}`,ty=f.type||'video/mp4';say(T().uploading);const url=await uploadFile(path,f,ty);await sendMsg({kind:'video',media_url:url,media_path:path,body:first?cap:''});first=false}catch(e){console.warn(e);say(T().err+': '+(e.message||''))}continue}if(!/^image\//.test(f.type))continue;try{const blob=await shrinkImage(f),id=uuid(),path=`img/${id}.jpg`;const url=await uploadFile(path,blob,'image/jpeg');await sendMsg({kind:'image',media_url:url,media_path:path,body:first?cap:''});first=false}catch(e){console.warn(e);say(T().err+': '+(e.message||''))}}
+ if(!first){$('chatInput').value='';syncBar()}}
+function syncBar(){const has=$('chatInput').value.trim().length>0;$('chatSend').classList.toggle('cHide',!has);$('chatMic').classList.toggle('cHide',has);const i=$('chatInput');i.style.height='auto';i.style.height=Math.min(130,i.scrollHeight)+'px'}
+
+/* ---------- głosówki ---------- */
+let rec=null,stream=null,chunks=[],recStart=0,recTimer=null,recMime='';
+function pickMime(){if(!window.MediaRecorder)return null;const c=['audio/mp4;codecs=mp4a.40.2','audio/mp4','audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus'];for(const x of c){try{if(MediaRecorder.isTypeSupported(x))return x}catch(e){}}return ''}
+async function startRec(){const t=T();if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder){say(t.micNo);return}
+ try{stream=await navigator.mediaDevices.getUserMedia({audio:true})}catch(e){say(t.micDenied);return}
+ recMime=pickMime();try{rec=recMime?new MediaRecorder(stream,{mimeType:recMime}):new MediaRecorder(stream)}catch(e){stream.getTracks().forEach(x=>x.stop());say(t.micNo);return}
+ chunks=[];rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};rec.start(250);recStart=Date.now();
+ $('chatRec').classList.add('on');$('chatForm').classList.add('cHide');$('chatRecT').textContent='0:00';
+ recTimer=setInterval(()=>{const ms=Date.now()-recStart;$('chatRecT').textContent=fmtDur(ms);if(ms>=MAX_REC)stopRec(true)},250)}
+function stopRec(send){if(!rec)return;clearInterval(recTimer);const r=rec,ms=Date.now()-recStart,mime=r.mimeType||recMime||'audio/webm';rec=null;
+ r.onstop=async()=>{stream&&stream.getTracks().forEach(x=>x.stop());stream=null;$('chatRec').classList.remove('on');$('chatForm').classList.remove('cHide');
+  if(!send)return;if(ms<700){say(T().tooShort);return}
+  const type=mime.split(';')[0],ext=/mp4/.test(type)?'m4a':/ogg/.test(type)?'ogg':'webm',blob=new Blob(chunks,{type});
+  try{const id=uuid(),path=`voice/${id}.${ext}`,url=await uploadFile(path,blob,type);await sendMsg({kind:'voice',media_url:url,media_path:path,duration_ms:ms})}catch(e){console.warn(e);say(T().err+': '+(e.message||''))}};
+ try{r.stop()}catch(e){r.onstop()}}
+
+/* ---------- otwieranie / zamykanie ---------- */
+async function openChat(){if(!me())return;open=true;panel.classList.add('open');document.body.style.overflow='hidden';applyLang();fitViewport();
+ renderAll();subscribe();startPolling();await loadAll();toBottom();markSeen();updateBadge()}
+function closeChat(){if(rec)stopRec(false);document.querySelectorAll('#chatList audio').forEach(a=>a.pause());open=false;panel.classList.remove('open');document.body.style.overflow='';startPolling();updateBadge();try{const u=new URL(location.href);if(u.searchParams.has('chat')){u.searchParams.delete('chat');history.replaceState(null,'',u)}}catch(e){}}
+function fitViewport(){const v=window.visualViewport;if(v&&panel){panel.style.height=v.height+'px';panel.style.top=v.offsetTop+'px'}}
+if(window.visualViewport){visualViewport.addEventListener('resize',fitViewport);visualViewport.addEventListener('scroll',fitViewport)}
+
+if(tile)tile.addEventListener('click',openChat);
+$('chatClose').addEventListener('click',closeChat);$('chatBack').addEventListener('click',closeChat);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&open&&!lb.classList.contains('open'))closeChat()});
+$('chatInput').addEventListener('input',syncBar);
+$('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&window.matchMedia('(hover:hover)').matches){e.preventDefault();$('chatForm').requestSubmit()}});
+$('chatForm').addEventListener('submit',async e=>{e.preventDefault();const v=$('chatInput').value.trim();if(!v||sendingBusy)return;sendingBusy=true;$('chatInput').value='';syncBar();const ok=await sendMsg({kind:'text',body:v});sendingBusy=false;if(!ok){$('chatInput').value=v;syncBar()}});
+$('chatPhoto').addEventListener('change',async e=>{const fs=[...e.target.files];e.target.value='';if(fs.length)await sendPhotos(fs)});
+$('chatMic').addEventListener('click',startRec);
+$('chatRecCancel').addEventListener('click',()=>stopRec(false));$('chatRecOk').addEventListener('click',()=>stopRec(true));
+$('chatList').addEventListener('click',async e=>{const b=e.target.closest('[data-del]');if(!b)return;const t=T();
+ if(!b.dataset.arm){b.dataset.arm='1';b.textContent=t.sure;setTimeout(()=>{if(b.isConnected){delete b.dataset.arm;b.textContent='🗑'}},3000);return}
+ const id=b.dataset.del,m=msgs.find(x=>x.id===id);try{const r=await db.from('chat_messages').delete().eq('id',id);if(r.error)throw r.error;if(m?.media_path){try{await db.storage.from(BUCKET).remove([m.media_path])}catch(x){}}removeMsg(id)}catch(err){say(t.err+': '+(err.message||''))}});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){if(open){loadAll().then(markSeen)}else if(me())loadAll()}});
+
+/* ---------- integracja z lobby ---------- */
+if(typeof window.applyGlobalLanguage==='function'){const o=window.applyGlobalLanguage;window.applyGlobalLanguage=function(){const r=o.apply(this,arguments);try{applyLang()}catch(e){}return r}}
+if(typeof window.collectDynamicNotifications==='function'||typeof collectDynamicNotifications==='function'){
+ const prev=collectDynamicNotifications;
+ collectDynamicNotifications=async function(){let list=[];try{list=await prev.apply(this,arguments)}catch(e){list=[]}
+  try{if(!open&&loaded){const u=unreadList();if(u.length){const last=u[u.length-1],txt=last.kind==='image'?'📷 '+T().photo:last.kind==='voice'?'🎤 '+T().voice:last.kind==='video'?'🎬 '+T().video:last.body;
+   list=[{level:'warning',icon:'💬',title:T().title+': '+T().newMsgs(u.length),text:last.sender_name+': '+String(txt).slice(0,60),target:'chat',chatUnread:true},...list]}}}catch(e){}
+  return list}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-notification-target="chat"]');if(!b)return;e.stopImmediatePropagation();e.preventDefault();$('notificationPanel')?.classList.remove('open');openChat()},true);
+if('serviceWorker' in navigator)navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.type==='open-chat')openChat()});
+
+/* start: po zalogowaniu wczytaj wiadomości (znaczek) i obsłuż ?chat=1 */
+let wantChat=/[?&]chat=1/.test(location.search),tries=0;
+const boot=setInterval(async()=>{if(++tries>120)return clearInterval(boot);if(!me())return;clearInterval(boot);applyLang();subscribe();startPolling();await loadAll();if(wantChat){wantChat=false;openChat()}},500);
+applyLang();
+})();
+</script>
+
+<style id="settle-css">body.qSettle #quickTomorrowCard,body.qSettle #quickPartsCard{opacity:0!important}#quickTomorrowCard,#quickPartsCard{transition:opacity .25s ease}</style>
+<script id="settle-script">(()=>{try{const A=document.getElementById('quickTomorrowCard'),B=document.getElementById('quickPartsCard');if(!A||!B)return;const P=A.parentElement;
+const uid=()=>{try{for(const k of Object.keys(localStorage)){if(/^sb-.*-auth-token$/.test(k)){const j=JSON.parse(localStorage.getItem(k));const id=(j.user||j.currentSession?.user||{}).id;if(id)return id}}}catch(e){}return ''};
+const key=()=>'vf-quick-cache-'+uid()+'-'+(localStorage.getItem('vf-language')||'');
+const snap=()=>[A,B].map(e=>e.outerHTML).concat([[A.offsetHeight,B.offsetHeight]]);
+let cache=null;const kk=key();
+document.body.classList.add('qSettle');let shownAt=0,last=0,done=false,ov=[];
+const bump=()=>{last=Date.now()};const mo=new MutationObserver(bump);[A,B].forEach(e=>mo.observe(e,{subtree:true,childList:true,characterData:true,attributes:true}));
+const mk=(el,html)=>{const t=document.createElement('div');t.innerHTML=html;const c=t.firstElementChild;c.removeAttribute('id');c.querySelectorAll('[id]').forEach(n=>n.removeAttribute('id'));c.setAttribute('aria-hidden','true');c.removeAttribute('title');c.style.cssText+=';position:absolute;pointer-events:none;margin:0;z-index:2;transition:opacity .25s ease;top:'+el.offsetTop+'px;left:'+el.offsetLeft+'px;width:'+el.offsetWidth+'px';c.style.setProperty('height',el.offsetHeight+'px','important');P.appendChild(c);return c};
+const showOv=()=>{if(ov.length||!cache)return;if(getComputedStyle(P).position==='static')P.style.position='relative';A.style.setProperty('height',cache[2][0]+'px','important');B.style.setProperty('height',cache[2][1]+'px','important');ov=[mk(A,cache[0]),mk(B,cache[1])]};
+const fin=()=>{if(done)return;done=true;mo.disconnect();clearInterval(iv);A.style.removeProperty('height');B.style.removeProperty('height');const cur=snap();const same=cache&&cache[0]===cur[0]&&cache[1]===cur[1];try{localStorage.setItem(kk,JSON.stringify(cur))}catch(e){}
+if(same){[A,B].forEach(e=>e.style.transition='none');document.body.classList.remove('qSettle');ov.forEach(o=>o.remove());setTimeout(()=>[A,B].forEach(e=>e.style.transition=''),50)}else{document.body.classList.remove('qSettle');ov.forEach(o=>{o.style.opacity='0';setTimeout(()=>o.remove(),300)})}};
+try{cache=JSON.parse(localStorage.getItem(kk)||'null');if(!Array.isArray(cache)||cache.length!==3)cache=null}catch(e){cache=null}
+const geo=()=>{[A,B].forEach((e,i)=>{const o=ov[i];if(o){o.style.top=e.offsetTop+'px';o.style.left=e.offsetLeft+'px';o.style.width=e.offsetWidth+'px';o.style.setProperty('height',e.offsetHeight+'px','important')}})};window.addEventListener('resize',geo);const iv=setInterval(()=>{const now=Date.now();geo();if(!B.offsetParent){shownAt=0;return}if(!shownAt){shownAt=now;last=now;showOv()}if(now-shownAt>6000||(now-shownAt>900&&now-last>500))fin()},100);setTimeout(fin,60000)}catch(e){document.body.classList.remove('qSettle')}})();</script>
 </body>
 </html>

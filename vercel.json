@@ -1,5 +1,9 @@
 {
   "framework": null,
   "buildCommand": "",
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "rewrites": [
+    { "source": "/public", "destination": "/pub/index.html" },
+    { "source": "/public/", "destination": "/pub/index.html" }
+  ]
 }

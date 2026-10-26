@@ -1,7 +1,14 @@
 <!doctype html>
 <html lang="pl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta charset="utf-8"><!-- Jarvis: automatyczne zgłaszanie błędów do centrum błędów (klucz tylko do zgłaszania, bez dostępu do danych) -->
+<script>(function(){var K="jk_JEBbOHExTgQCbnrVfPJO62LvDqLb7mB2",U="https://tpoyenlvzzkhtjkmazao.supabase.co/functions/v1/jarvis-ingest",S="Vedlikehold/parts",L="error",n=0,seen={};
+function send(t,m,d){try{t=String(t||"Błąd").slice(0,200);if(n>=10||/^Script error\.?$/.test(t))return;var f=t+"|"+String(m||"").slice(0,80);if(seen[f])return;seen[f]=1;n++;
+fetch(U,{method:"POST",headers:{"Content-Type":"application/json","x-jarvis-key":K},body:JSON.stringify({title:t,message:String(m||"").slice(0,3000),level:L,source:S,url:location.href,details:d||{}})}).catch(function(){});}catch(e){}}
+window.addEventListener("error",function(e){if(e&&e.message)send(e.message,(e.error&&e.error.stack)||"",{file:String(e.filename||"").split("?")[0],line:e.lineno,col:e.colno});});
+window.addEventListener("unhandledrejection",function(e){var r=e&&e.reason||{};send("Nieobsłużony błąd: "+String(r.message||r).slice(0,160),r.stack||"",{});});
+window.JarvisReport=function(t,m,d){send(t,m,d);};})();</script>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#07111f"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Parts | Vedlikehold Viking Fjord</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

@@ -1,13 +1,21 @@
 <!doctype html>
 <html lang="pl">
 <head>
-<meta charset="utf-8"><!-- Jarvis: automatyczne zgłaszanie błędów do centrum błędów (klucz tylko do zgłaszania, bez dostępu do danych) -->
+<meta charset="utf-8"><!-- Jarvis: zgłaszanie błędów do centrum błędów + synchronizacja usuniętych zgłoszeń (klucz tylko do zgłaszania, bez dostępu do danych) -->
 <script>(function(){var K="jk_JEBbOHExTgQCbnrVfPJO62LvDqLb7mB2",U="https://tpoyenlvzzkhtjkmazao.supabase.co/functions/v1/jarvis-ingest",S="Vedlikehold/vakt",L="error",n=0,seen={};
-function send(t,m,d,lv){try{t=String(t||"Błąd").slice(0,200);if(n>=10||/^Script error\.?$/.test(t))return;var f=t+"|"+String(m||"").slice(0,80);if(seen[f])return;seen[f]=1;n++;
-fetch(U,{method:"POST",headers:{"Content-Type":"application/json","x-jarvis-key":K},body:JSON.stringify({title:t,message:String(m||"").slice(0,3000),level:lv||L,source:S,url:location.href,details:d||{}})}).catch(function(){});}catch(e){}}
+function post(b){return fetch(U,{method:"POST",headers:{"Content-Type":"application/json","x-jarvis-key":K},body:JSON.stringify(b)});}
+function send(t,m,d,lv){try{t=String(t||"Błąd").slice(0,200);if(n>=10||/^Script error\.?$/.test(t))return;var f=t+"|"+String(m||"").slice(0,80);if(seen[f])return;seen[f]=1;n++;d=d||{};
+post({title:t,message:String(m||"").slice(0,3000),level:lv||L,source:S,url:location.href,ref:d.ref?String(d.ref):undefined,details:d}).catch(function(){});}catch(e){}}
 window.addEventListener("error",function(e){if(e&&e.message)send(e.message,(e.error&&e.error.stack)||"",{file:String(e.filename||"").split("?")[0],line:e.lineno,col:e.colno});});
 window.addEventListener("unhandledrejection",function(e){var r=e&&e.reason||{};send("Nieobsłużony błąd: "+String(r.message||r).slice(0,160),r.stack||"",{});});
-window.JarvisReport=function(t,m,d,lv){send(t,m,d,lv||"error");};})();</script>
+window.JarvisReport=function(t,m,d,lv){send(t,m,d,lv||"error");};
+/* co usunięto / rozwiązano w Jarvisie — aplikacja stosuje to u siebie */
+var cache=null;window.JarvisSync=function(){if(cache&&Date.now()-cache.t<30000)return cache.p;var p=post({action:"sync"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null});cache={t:Date.now(),p:p};return p;};
+function done(){try{return JSON.parse(localStorage.getItem("jarvis.sync."+S)||"{}")}catch(e){return{}}}function mark(o){try{localStorage.setItem("jarvis.sync."+S,JSON.stringify(o))}catch(e){}}
+window.JarvisSyncList=async function(list,opt){opt=opt||{};var id=opt.id||"id",st=opt.status||"status",fx=opt.fixed||"fixed";try{var s=await window.JarvisSync();if(!s)return{list:list,changed:false};var del=new Set(s.delete||[]),fix=new Set(s.fixed||[]),seenF=done(),ch=false;
+var out=list.filter(function(r){if(del.has(String(r[id]))){ch=true;return false}return true}).map(function(r){var k=String(r[id]);if(fix.has(k)&&!seenF[k]){seenF[k]=1;if(r[st]!==fx){ch=true;var c=Object.assign({},r);c[st]=fx;return c}}return r});mark(seenF);return{list:out,changed:ch}}catch(e){return{list:list,changed:false}}};
+window.JarvisSyncTable=async function(client,table,fixedPatch){try{var s=await window.JarvisSync();if(!s)return;if(s.delete&&s.delete.length)await client.from(table).delete().in("id",s.delete);var seenF=done(),f=(s.fixed||[]).filter(function(k){return!seenF[k]});if(fixedPatch&&f.length){await client.from(table).update(fixedPatch).in("id",f);f.forEach(function(k){seenF[k]=1});mark(seenF);}}catch(e){}};
+})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#07111f"><title>Vakt</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>

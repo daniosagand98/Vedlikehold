@@ -25,12 +25,15 @@ const KEY='vf-tts',LC={pl:'pl-PL',en:'en-GB',no:'nb-NO',nb:'nb-NO',lt:'lt-LT'};
 const on=()=>{try{return localStorage.getItem(KEY)==='1'}catch(e){return false}};
 const lang=()=>{try{return LC[localStorage.getItem('vf-language')]||'pl-PL'}catch(e){return 'pl-PL'}};
 const MSG={pl:['Czytanie na głos włączone. Przytrzymaj tekst, a zostanie przeczytany.','Czytanie na głos wyłączone.'],en:['Read aloud is on. Press and hold a text to hear it.','Read aloud is off.'],no:['Opplesning er på. Trykk og hold på en tekst for å høre den.','Opplesning er av.'],lt:['Skaitymas balsu įjungtas. Palaikykite tekstą, kad jį išgirstumėte.','Skaitymas balsu išjungtas.']};
-function say(text,lg){const s=window.speechSynthesis;s.cancel();
+function say(text,lg){const s=window.speechSynthesis;try{s.cancel();s.resume()}catch(e){}
  text=String(text||'').replace(/[\p{Extended_Pictographic}‍️]/gu,' ').replace(/\s+/g,' ').trim();if(!text)return;
  const parts=text.match(/[^.!?;\n]+[.!?;]*/g)||[text],chunks=[];let cur='';
  for(const p of parts){if((cur+p).length>180&&cur){chunks.push(cur);cur=p}else cur+=p}if(cur)chunks.push(cur);
  const voices=s.getVoices(),pre=lg.slice(0,2).toLowerCase(),v=voices.find(x=>x.lang&&x.lang.replace('_','-').toLowerCase()===lg.toLowerCase())||voices.find(x=>x.lang&&x.lang.toLowerCase().startsWith(pre)||(pre==='nb'&&/^n[bo]/i.test(x.lang||'')));
- for(const c of chunks){const u=new SpeechSynthesisUtterance(c.trim());u.lang=lg;if(v)u.voice=v;u.rate=.92;s.speak(u)}}
+ setTimeout(()=>{for(const c of chunks){const u=new SpeechSynthesisUtterance(c.trim());u.lang=lg;if(v)u.voice=v;u.rate=.92;s.speak(u)}},90)}
+/* przeglądarki (iOS/Safari) pozwalają mówić dopiero po geście użytkownika na stronie: odblokowujemy cichą wypowiedzią */
+const unlock=()=>{try{if(!on()||speechSynthesis.speaking)return;const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u)}catch(e){}};
+['touchend','click','keydown'].forEach(n=>document.addEventListener(n,unlock,{capture:true,passive:true}));
 window.vfSpeak=text=>say(text,lang());
 window.vfTtsOn=on;
 window.vfTtsSet=function(v){try{localStorage.setItem(KEY,v?'1':'0')}catch(e){}apply();const m=MSG[Object.keys(MSG).find(k=>LC[k]===lang())||'pl'];say(v?m[0]:m[1],lang())};

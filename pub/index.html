@@ -32,8 +32,11 @@ function say(text,lg){const s=window.speechSynthesis;try{s.cancel();s.resume()}c
  const voices=s.getVoices(),pre=lg.slice(0,2).toLowerCase(),v=voices.find(x=>x.lang&&x.lang.replace('_','-').toLowerCase()===lg.toLowerCase())||voices.find(x=>x.lang&&x.lang.toLowerCase().startsWith(pre)||(pre==='nb'&&/^n[bo]/i.test(x.lang||'')));
  setTimeout(()=>{for(const c of chunks){const u=new SpeechSynthesisUtterance(c.trim());u.lang=lg;if(v)u.voice=v;u.rate=.92;s.speak(u)}},90)}
 /* przeglądarki (iOS/Safari) pozwalają mówić dopiero po geście użytkownika na stronie: odblokowujemy cichą wypowiedzią */
-const unlock=()=>{try{if(!on()||speechSynthesis.speaking)return;const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u)}catch(e){}};
-['touchend','click','keydown'].forEach(n=>document.addEventListener(n,unlock,{capture:true,passive:true}));
+/* rozgrzewka: lista głosów ładowana od razu + cicha wypowiedź w języku użytkownika już przy pierwszym dotknięciu */
+let warmed=false;try{speechSynthesis.getVoices();speechSynthesis.addEventListener('voiceschanged',()=>{try{speechSynthesis.getVoices()}catch(e){}})}catch(e){}
+const unlock=()=>{try{if(!on()||speechSynthesis.speaking)return;const lg=lang(),u=new SpeechSynthesisUtterance(' ');u.volume=0;u.lang=lg;const vs=speechSynthesis.getVoices(),v=vs.find(x=>x.lang&&x.lang.replace('_','-').toLowerCase()===lg.toLowerCase())||vs.find(x=>x.lang&&x.lang.toLowerCase().startsWith(lg.slice(0,2).toLowerCase()));if(v)u.voice=v;speechSynthesis.speak(u);warmed=true}catch(e){}};
+['pointerdown','touchstart','touchend','click','keydown'].forEach(n=>document.addEventListener(n,unlock,{capture:true,passive:true}));
+if(on())try{unlock()}catch(e){}
 window.vfSpeak=text=>say(text,lang());
 window.vfTtsOn=on;
 window.vfTtsSet=function(v){try{localStorage.setItem(KEY,v?'1':'0')}catch(e){}apply();const m=MSG[Object.keys(MSG).find(k=>LC[k]===lang())||'pl'];say(v?m[0]:m[1],lang())};

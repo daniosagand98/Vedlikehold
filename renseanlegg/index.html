@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8"><script>(function(){var K="jk_JEBbOHExTgQCbnrVfPJO62LvDqLb7mB2",U="https://tpoyenlvzzkhtjkmazao.supabase.co/functions/v1/jarvis-ingest",S="Vedlikehold/renseanlegg",L="error",n=0,seen={};
+function post(b){return fetch(U,{method:"POST",headers:{"Content-Type":"application/json","x-jarvis-key":K},body:JSON.stringify(b)});}
+function send(t,m,d,lv){try{t=String(t||"Błąd").slice(0,200);if(n>=10||/^Script error\.?$/.test(t))return;var f=t+"|"+String(m||"").slice(0,80);if(seen[f])return;seen[f]=1;n++;d=d||{};
+post({title:t,message:String(m||"").slice(0,3000),level:lv||L,source:S,url:location.href,ref:d.ref?String(d.ref):undefined,details:d}).catch(function(){});}catch(e){}}
+window.addEventListener("error",function(e){if(e&&e.message)send(e.message,(e.error&&e.error.stack)||"",{file:String(e.filename||"").split("?")[0],line:e.lineno,col:e.colno});});
+window.addEventListener("unhandledrejection",function(e){var r=e&&e.reason||{};send("Nieobsłużony błąd: "+String(r.message||r).slice(0,160),r.stack||"",{});});
+window.JarvisReport=function(t,m,d,lv){send(t,m,d,lv||"error");};
+/* co usunięto / rozwiązano w Jarvisie — aplikacja stosuje to u siebie */
+var cache=null;window.JarvisSync=function(){if(cache&&Date.now()-cache.t<30000)return cache.p;var p=post({action:"sync"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null});cache={t:Date.now(),p:p};return p;};
+function done(){try{return JSON.parse(localStorage.getItem("jarvis.sync."+S)||"{}")}catch(e){return{}}}function mark(o){try{localStorage.setItem("jarvis.sync."+S,JSON.stringify(o))}catch(e){}}
+window.JarvisSyncList=async function(list,opt){opt=opt||{};var id=opt.id||"id",st=opt.status||"status",fx=opt.fixed||"fixed";try{var s=await window.JarvisSync();if(!s)return{list:list,changed:false};var del=new Set(s.delete||[]),fix=new Set(s.fixed||[]),seenF=done(),ch=false;
+var out=list.filter(function(r){if(del.has(String(r[id]))){ch=true;return false}return true}).map(function(r){var k=String(r[id]);if(fix.has(k)&&!seenF[k]){seenF[k]=1;if(r[st]!==fx){ch=true;var c=Object.assign({},r);c[st]=fx;return c}}return r});mark(seenF);return{list:out,changed:ch}}catch(e){return{list:list,changed:false}}};
+window.JarvisSyncTable=async function(client,table,fixedPatch){try{var s=await window.JarvisSync();if(!s)return;if(s.delete&&s.delete.length)await client.from(table).delete().in("id",s.delete);var seenF=done(),f=(s.fixed||[]).filter(function(k){return!seenF[k]});if(fixedPatch&&f.length){await client.from(table).update(fixedPatch).in("id",f);f.forEach(function(k){seenF[k]=1});mark(seenF);}}catch(e){}};
+})();</script>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#07111f"><title>Renseanlegg</title>
+<link rel="icon" type="image/png" href="../icons/icon-192.png">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#07111f;--panel:#101d2f;--panel2:#15253a;--text:#f4f7fb;--muted:#9fb0c6;--accent:#2f80ed;--ok:#24b47e;--warn:#f0a73a;--danger:#e45858;--line:#263a52}
+*{box-sizing:border-box}html,body{touch-action:pan-x pan-y;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(180deg,#07111f,#0b1727);color:var(--text);min-height:100vh}
+.app{max-width:760px;margin:0 auto;padding:max(12px,env(safe-area-inset-top)) 14px 40px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:14px}.top h1{margin:0;font-size:22px}.top small{color:var(--muted)}
+.iconbtn{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:14px;min-width:46px;height:46px;font-size:18px;padding:0 12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
+.hero{text-align:center;padding:24px 16px}.hero h2{margin:8px 0}.muted{color:var(--muted)}
+.btn{border:0;border-radius:14px;padding:13px 18px;font-size:16px;font-weight:700;background:var(--panel2);color:var(--text);border:1px solid var(--line)}
+.btn.primary{background:var(--accent);border-color:var(--accent)}.btn.ok{background:var(--ok);border-color:var(--ok)}.btn.red{background:var(--danger);border-color:var(--danger)}.btn:disabled{opacity:.5}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.hidden{display:none!important}
+.progress{height:10px;background:#0b1727;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--ok);width:0}
+.pt{border-left:5px solid var(--line)}.pt.done{border-left-color:var(--ok)}.pt.late{border-left-color:var(--danger)}.pt.photoReq:not(.done){border-left-color:var(--warn)}
+.pt h3{margin:0 0 4px;font-size:18px}.pt .meta{font-size:13px;color:var(--muted)}
+.badge{display:inline-block;font-size:12px;font-weight:700;border-radius:99px;padding:3px 9px;background:#1c3350;color:#cfe0f5;margin-right:6px}.badge.cam{background:#5a4310;color:#ffd98a}.badge.ok{background:#134a35;color:#a6f0cf}.badge.red{background:#5a1d1d;color:#ffb3b3}
+input,select{width:100%;background:#0b1727;border:1px solid var(--line);color:var(--text);border-radius:12px;padding:12px;font-size:16px}
+label{display:block;font-size:13px;color:var(--muted);margin:8px 0 4px}
+.thumb{width:100%;max-height:260px;object-fit:cover;border-radius:12px;margin-top:8px;border:1px solid var(--line)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.actions .btn{flex:1;min-width:130px}
+.banner{background:#4a3410;border:1px solid #8a6417;color:#ffe2a8;border-radius:14px;padding:12px 14px;margin-bottom:12px;font-weight:600}
+.banner.red{background:#4a1818;border-color:#8a2c2c;color:#ffc4c4}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#0e2a1e;color:#bff3da;border:1px solid #1d6e4d;border-radius:14px;padding:12px 18px;z-index:99;display:none;max-width:90%}
+details.hist{border-top:1px solid var(--line);padding:10px 0}details.hist summary{cursor:pointer;font-weight:700}
+.grab{font-size:26px;line-height:1;padding:6px 10px;color:var(--muted);touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}.adm.dragging{background:#1b3150;border-radius:12px;box-shadow:0 6px 18px #0008;position:relative;z-index:5}input[type=time]{display:block;width:100%;min-width:0;max-width:100%;-webkit-appearance:none;appearance:none;text-align:left;min-height:48px}.dayBtn{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:8px;text-align:left}.adm{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:10px 0}
+.sw{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--text);margin:0}.sw input{width:22px;height:22px}
+.appFooter{text-align:center;color:var(--muted);font-size:12px;margin-top:24px;line-height:1.6}.appFooter a{color:inherit}
+</style>
+</head>
+<body><main class="app">
+<header class="top"><button class="iconbtn" id="homeBtn" aria-label="Lobby">🏠</button><div style="flex:1"><h1 id="title">Renseanlegg</h1><small id="subtitle"></small></div><button class="iconbtn hidden" id="adminBtn">⚙️</button></header>
+<div id="alerts"></div>
+<section id="home"><div class="card hero"><div style="font-size:48px">💧</div><h2 id="startTitle"></h2><p class="muted" id="startDesc"></p><button class="btn primary" id="startBtn"></button></div><div class="card hidden" id="histCard"><h3 id="histTitle" style="margin-top:0"></h3><div id="history"></div></div></section>
+<section id="day" class="hidden"><div class="card"><div class="row"><h2 style="margin:0" id="dayTitle"></h2><button class="btn" id="dayBack"></button></div><p class="muted" id="dayInfo"></p></div><div id="dayRows"></div></section>
+<section id="run" class="hidden"><div class="card"><div class="row"><b id="progressText"></b><span class="muted" id="runInfo"></span></div><div class="progress" style="margin-top:10px"><i id="bar"></i></div></div><div id="points"></div><div class="card"><button class="btn ok" id="finishBtn" style="width:100%"></button></div></section>
+<section id="admin" class="hidden"><div class="card"><div class="row"><h2 style="margin:0" id="admTitle"></h2><button class="btn" id="admClose"></button></div><p class="muted" id="admHelp"></p></div><div class="card" id="admList"></div><div class="card"><label id="iceLbl"></label><input id="iceTime" type="time"></div></section>
+<footer class="appFooter">Renseanlegg v1.2.2<br>Created and designed by: <a href="https://dwsystem.eu" target="_blank" rel="noopener">DWSystem</a></footer>
+</main><div class="toast" id="toast"></div>
+<input id="fileIn" type="file" accept="image/*" capture="environment" class="hidden">
+<script>
+const SB_URL='https://xgcowpifwmihuukjinuf.supabase.co',SB_KEY='sb_publishable_OvfeU9VHpQt-A8e8MX_ZQQ_tfMpQ3N_';
+const db=supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true}});
+const CFG_ID=94,RUNS_ID=95,BUCKET='work-orders',KEEP_DAYS=30;
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+const UI={
+pl:{sub:'Kontrola oczyszczalni',startTitle:'Kontrola renseanlegg',startDesc:'Wykonaj punkty kontroli po kolei. Przy części z nich wymagane jest zdjęcie z godziną.',start:'Start kontroli',resume:'Kontynuuj kontrolę',hist:'Ostatnie 30 dni',noHist:'Brak kontroli.',prog:'Zrobione',startedBy:'Start',by:'przez',done:'Zrobione',doIt:'Zrobione ✓',photoReq:'Wymagane zdjęcie',takePhoto:'📷 Zrób zdjęcie',retake:'📷 Zrób ponownie',photoAt:'Zdjęcie o',enterPh:'Wpisz pH',phVal:'pH',needPhoto:'Najpierw zrób zdjęcie.',needPh:'Wpisz wartość pH (np. 7.2).',finish:'Zakończ kontrolę',finishLeft:'Zostały niewykonane punkty.',finished:'Kontrola zakończona',undo:'Cofnij',uploading:'Wysyłanie zdjęcia…',saved:'Zapisano',err:'Błąd',dueAt:'na',iceDue:'Włącz maszynę do lodu o',iceLate:'Maszyna do lodu nie włączona (miało być o',iceNow:'Czas włączyć maszynę do lodu!',noRun:'Dzisiejsza kontrola jeszcze nie została wykonana.',adm:'Ustawienia punktów',admHelp:'Zaznacz, przy których punktach pracownik musi zrobić zdjęcie, oraz które punkty są aktywne.',close:'Zamknij',photo:'Zdjęcie',active:'Aktywny',iceTime:'Godzina włączenia maszyny do lodu',photos:'zdjęć',today:'Dziś',confirmFinish:'Zakończyć kontrolę?',open:'w trakcie',addStep:'Dodaj nowy krok',stepName:'Nazwa kroku',stepType:'Rodzaj',typeCheck:'Odhaczenie',typePh:'Wartość pH (liczba)',add:'Dodaj',del:'Usuń',delConfirm:'Usunąć krok',stepNameNeed:'Wpisz nazwę kroku.',back:'Wróć',finishedAt:'Koniec',notDone:'nie wykonano'},
+en:{sub:'Water treatment check',startTitle:'Renseanlegg check',startDesc:'Complete the check points one by one. Some of them require a photo with a timestamp.',start:'Start check',resume:'Continue check',hist:'Last 30 days',noHist:'No checks yet.',prog:'Done',startedBy:'Started',by:'by',done:'Done',doIt:'Done ✓',photoReq:'Photo required',takePhoto:'📷 Take photo',retake:'📷 Retake',photoAt:'Photo at',enterPh:'Enter pH',phVal:'pH',needPhoto:'Take the photo first.',needPh:'Enter the pH value (e.g. 7.2).',finish:'Finish check',finishLeft:'Some points are not done.',finished:'Check finished',undo:'Undo',uploading:'Uploading photo…',saved:'Saved',err:'Error',dueAt:'at',iceDue:'Turn on the ice machine at',iceLate:'Ice machine not started (due at',iceNow:'Time to turn on the ice machine!',noRun:"Today's check has not been done yet.",adm:'Point settings',admHelp:'Choose which points need a photo and which are active.',close:'Close',photo:'Photo',active:'Active',iceTime:'Ice machine start time',photos:'photos',today:'Today',confirmFinish:'Finish the check?',open:'in progress',addStep:'Add a new step',stepName:'Step name',stepType:'Type',typeCheck:'Check-off',typePh:'pH value (number)',add:'Add',del:'Delete',delConfirm:'Delete step',stepNameNeed:'Enter a step name.',back:'Back',finishedAt:'Finished',notDone:'not done'},
+no:{sub:'Kontroll av renseanlegg',startTitle:'Kontroll renseanlegg',startDesc:'Utfør kontrollpunktene ett og ett. Noen krever bilde med klokkeslett.',start:'Start kontroll',resume:'Fortsett kontroll',hist:'Siste 30 dager',noHist:'Ingen kontroller.',prog:'Utført',startedBy:'Start',by:'av',done:'Utført',doIt:'Utført ✓',photoReq:'Bilde kreves',takePhoto:'📷 Ta bilde',retake:'📷 Ta nytt',photoAt:'Bilde kl.',enterPh:'Skriv pH',phVal:'pH',needPhoto:'Ta bilde først.',needPh:'Skriv pH-verdi (f.eks. 7.2).',finish:'Fullfør kontroll',finishLeft:'Noen punkter er ikke utført.',finished:'Kontroll fullført',undo:'Angre',uploading:'Sender bilde…',saved:'Lagret',err:'Feil',dueAt:'kl.',iceDue:'Slå på ismaskinen kl.',iceLate:'Ismaskinen er ikke slått på (skulle vært kl.',iceNow:'På tide å slå på ismaskinen!',noRun:'Dagens kontroll er ikke utført ennå.',adm:'Punktinnstillinger',admHelp:'Velg hvilke punkter som krever bilde og hvilke som er aktive.',close:'Lukk',photo:'Bilde',active:'Aktiv',iceTime:'Starttid for ismaskin',photos:'bilder',today:'I dag',confirmFinish:'Fullføre kontrollen?',open:'pågår',addStep:'Legg til nytt steg',stepName:'Navn på steget',stepType:'Type',typeCheck:'Avkrysning',typePh:'pH-verdi (tall)',add:'Legg til',del:'Slett',delConfirm:'Slette steget',stepNameNeed:'Skriv navn på steget.',back:'Tilbake',finishedAt:'Ferdig',notDone:'ikke utført'}
+};
+let lang=(()=>{try{return localStorage.getItem('vf-language')||new URLSearchParams(location.search).get('lang')||'pl'}catch(e){return 'pl'}})();
+if(!UI[lang])lang=lang==='nb'?'no':'pl';
+const t=k=>(UI[lang]||UI.pl)[k]??k;
+const PN={clean_filter:{pl:'Wyczyść filtr',en:'Clean the filter',no:'Rengjør filteret'},clean_plant:{pl:'Wyczyść renseanlegg',en:'Clean the renseanlegg',no:'Rengjør renseanlegget'},ph1:{pl:'pH – zbiornik 1',en:'pH – tank 1',no:'pH – tank 1'},ph2:{pl:'pH – zbiornik 2',en:'pH – tank 2',no:'pH – tank 2'},ph3:{pl:'pH – zbiornik 3',en:'pH – tank 3',no:'pH – tank 3'},panel:{pl:'Zdjęcie panelu z pomiarami',en:'Photo of the measurement panel',no:'Bilde av målepanelet'},acid:{pl:'Sprawdź kwas (addic)',en:'Check acid',no:'Sjekk syre'},maursyre:{pl:'Sprawdź maursyre',en:'Check maursyre',no:'Sjekk maursyre'},chlor:{pl:'Sprawdź chlor',en:'Check chlorine',no:'Sjekk klor'},ice:{pl:'Włącz maszynę do lodu',en:'Turn on the ice machine',no:'Slå på ismaskinen'}};
+const pname=p=>PN[p.id]?.[lang]||p.name;
+const DEF={updated_at:'',iceTime:'08:30',points:[
+{id:'clean_filter',name:'Clean filter',type:'check',photo:false,active:true},
+{id:'clean_plant',name:'Clean renseanlegg',type:'check',photo:false,active:true},
+{id:'ph1',name:'pH – tank 1',type:'ph',photo:false,active:true},
+{id:'ph2',name:'pH – tank 2',type:'ph',photo:false,active:true},
+{id:'ph3',name:'pH – tank 3',type:'ph',photo:false,active:true},
+{id:'panel',name:'Panel photo',type:'check',photo:true,active:true},
+{id:'acid',name:'Check acid',type:'check',photo:false,active:true},
+{id:'maursyre',name:'Check maursyre',type:'check',photo:false,active:true},
+{id:'chlor',name:'Check chlorine',type:'check',photo:false,active:true},
+{id:'ice',name:'Ice machine',type:'ice',photo:false,active:true}]};
+let cfg=JSON.parse(JSON.stringify(DEF)),runs=[],me=null,prof=null,isAdmin=false,photoTarget=null;
+const pad=n=>String(n).padStart(2,'0'),ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`,hm=iso=>{const d=new Date(iso);return `${pad(d.getHours())}:${pad(d.getMinutes())}`},dm=s=>{const [y,m,d]=s.split('-');return `${d}.${m}.${y.slice(2)}`};
+function toast(m){const el=$('toast');el.textContent=m;el.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>el.style.display='none',2400)}
+async function readState(id){const {data,error}=await db.from('app_state').select('payload').eq('id',id).maybeSingle();if(error)throw error;return data?.payload||null}
+async function writeState(id,payload){const {error}=await db.from('app_state').upsert({id,payload},{onConflict:'id'});if(error)throw error}
+/* konfiguracja: dopełniamy brakujące punkty z domyślnych */
+function mergeCfg(p){const out=JSON.parse(JSON.stringify(DEF));if(p){out.iceTime=p.iceTime||out.iceTime;out.updated_at=p.updated_at||'';if(Array.isArray(p.points))out.points=out.points.map(d=>{const x=p.points.find(y=>y.id===d.id);return x?{...d,photo:!!x.photo,active:x.active!==false}:d});if(Array.isArray(p.custom)){const cu=p.custom.filter(c=>c&&c.id&&c.name).map(c=>({id:String(c.id),name:String(c.name),type:c.type==='ph'?'ph':'check',photo:!!c.photo,active:c.active!==false,custom:true})),i=out.points.findIndex(x=>x.id==='ice');out.points.splice(i<0?out.points.length:i,0,...cu)}if(Array.isArray(p.order)){const orig=out.points.slice(),res=p.order.map(id=>orig.find(x=>x.id===id)).filter(Boolean);orig.forEach((x,ix)=>{if(!res.includes(x))res.splice(Math.min(ix,res.length),0,x)});out.points=res}}return out}
+async function loadAll(){
+ cfg=mergeCfg(await readState(CFG_ID));
+ const r=await readState(RUNS_ID);runs=Array.isArray(r?.runs)?r.runs:[];
+ await cleanup();
+}
+/* historia trzymana 30 dni: starsze wpisy i ich zdjęcia są usuwane */
+async function cleanup(){
+ const lim=Date.now()-KEEP_DAYS*864e5,old=runs.filter(r=>new Date(r.date+'T12:00').getTime()<lim);
+ if(!old.length||!me)return;
+ const paths=old.flatMap(r=>Object.values(r.items||{}).map(i=>i.photo?.path).filter(Boolean));
+ try{if(paths.length)await db.storage.from(BUCKET).remove(paths)}catch(e){}
+ await mutate(rs=>rs.filter(r=>new Date(r.date+'T12:00').getTime()>=lim));
+}
+/* zapis: zawsze czytamy świeży stan, zmieniamy, zapisujemy (kilka osób na raz) */
+async function mutate(fn){const r=await readState(RUNS_ID);let list=Array.isArray(r?.runs)?r.runs:[];list=fn(list)||list;await writeState(RUNS_ID,{runs:list,updated_at:new Date().toISOString()});runs=list}
+const todayRun=()=>runs.find(r=>r.date===ymd(new Date()));
+const activePts=()=>cfg.points.filter(p=>p.active);
+const doneCount=r=>activePts().filter(p=>r.items?.[p.id]?.doneAt).length;
+function iceStatus(){const now=new Date(),[h,m]=cfg.iceTime.split(':').map(Number),due=new Date(now.getFullYear(),now.getMonth(),now.getDate(),h,m),r=todayRun(),done=!!r?.items?.ice?.doneAt;return{due,done,late:!done&&now>=due,soon:!done&&now>=new Date(due.getTime()-10*60000)&&now<due}}
+let notified=false,ready=false;
+function renderAlerts(){
+ const el=$('alerts'),ice=activePts().find(p=>p.id==='ice');let h='';
+ if(ice){const s=iceStatus();if(s.late){h+=`<div class="banner red">🧊 ${esc(t('iceNow'))} (${esc(t('iceDue'))} ${esc(cfg.iceTime)})</div>`;
+   if(ready&&!notified&&'Notification'in window&&Notification.permission==='granted'){notified=true;let k='rense_ice_notif',d=ymd(new Date()),seen=false;try{seen=localStorage.getItem(k)===d;if(!seen)localStorage.setItem(k,d)}catch(e){}if(!seen)try{new Notification('🧊 Renseanlegg',{body:'🧊 '+t('iceNow')})}catch(e){}}}
+  else if(!s.done)h+=`<div class="banner">🧊 ${esc(t('iceDue'))} ${esc(cfg.iceTime)}</div>`}
+ const r=todayRun();if(!r&&new Date().getHours()>=7)h+=`<div class="banner">${esc(t('noRun'))}</div>`;
+ el.innerHTML=h}
+let curDay=null;function view(v,arg){['home','run','admin','day'].forEach(x=>$(x).classList.toggle('hidden',x!==v));renderAlerts();if(v==='day'){curDay=arg||curDay;renderDay(curDay)}if(v==='home')renderHome();if(v==='run')renderRun();if(v==='admin')renderAdmin()}
+function photoLine(it){return it.photo?`<div class="meta">${esc(t('photoAt'))} <b>${esc(hm(it.photo.takenAt))}</b></div>`:''}
+function renderHome(){
+ $('startTitle').textContent=t('startTitle');$('startDesc').textContent=t('startDesc');const r=todayRun();
+ $('startBtn').textContent=r&&!r.finishedAt?t('resume'):t('start');$('startBtn').classList.toggle('hidden',!!r?.finishedAt);
+ if(r?.finishedAt){$('startDesc').textContent='✅ '+t('finished')+' '+hm(r.finishedAt)}
+ $('histTitle').textContent=t('hist');
+ const list=[...runs].sort((a,b)=>b.date.localeCompare(a.date));
+ $('histCard').classList.toggle('hidden',!isAdmin);
+ $('history').innerHTML=list.length?list.map(r=>{const n=Object.values(r.items||{}).filter(i=>i.photo).length;
+  return `<button class="btn dayBtn" data-day="${esc(r.date)}"><span>${r.finishedAt?'✅':'⏳'} <b>${esc(dm(r.date))}</b> · ${esc(r.startedBy||'')}</span><span class="muted">${doneCount(r)}/${activePts().length}${n?` · 📷 ${n}`:''} ›</span></button>`}).join(''):`<p class="muted">${esc(t('noHist'))}</p>`}
+function renderDay(date){
+ const r=runs.find(x=>x.date===date);if(!r)return view('home');
+ $('dayTitle').textContent=dm(r.date);$('dayBack').textContent='‹ '+t('back');
+ const known=new Set(cfg.points.map(p=>p.id)),all=[...cfg.points,...Object.keys(r.items||{}).filter(k=>!known.has(k)).map(k=>({id:k,name:r.items[k].name||k}))];
+ $('dayInfo').innerHTML=`${esc(t('startedBy'))}: <b>${esc(hm(r.startedAt))}</b> ${esc(t('by'))} ${esc(r.startedBy||'')}${r.finishedAt?` · ${esc(t('finishedAt'))}: <b>${esc(hm(r.finishedAt))}</b>`:` · ${esc(t('open'))}`}`;
+ $('dayRows').innerHTML=all.map(p=>{const it=r.items?.[p.id];
+  if(!it?.doneAt)return `<div class="card pt"><h3>${esc(pname(p))}</h3><div class="meta">— ${esc(t('notDone'))}</div></div>`;
+  return `<div class="card pt done"><h3>${esc(pname(p))}</h3><div class="meta">✅ ${esc(t('done'))} <b>${esc(hm(it.doneAt))}</b> ${esc(t('by'))} ${esc(it.by||'')}${it.value?` · pH <b>${esc(it.value)}</b>`:''}</div>${photoLine(it)}${it.photo?.url?`<a href="${esc(it.photo.url)}" target="_blank" rel="noopener"><img class="thumb" loading="lazy" src="${esc(it.photo.url)}"></a>`:''}</div>`}).join('')}
+function renderRun(){
+ const keep={};document.querySelectorAll('[data-ph]').forEach(i=>{if(i.value)keep[i.dataset.ph]=i.value});
+ const r=todayRun();if(!r)return view('home');const pts=activePts(),dc=doneCount(r),fin=!!r.finishedAt;
+ $('progressText').textContent=`${t('prog')}: ${dc} / ${pts.length}`;$('bar').style.width=(pts.length?dc/pts.length*100:0)+'%';
+ $('runInfo').textContent=`${t('startedBy')} ${hm(r.startedAt)} ${t('by')} ${r.startedBy||''}`;
+ const ice=iceStatus();
+ $('points').innerHTML=pts.map(p=>{const it=r.items?.[p.id],done=!!it?.doneAt,late=p.id==='ice'&&ice.late&&!done;
+  let body='';
+  if(done){body=`<div class="meta">✅ ${esc(t('done'))} ${esc(hm(it.doneAt))} ${esc(t('by'))} ${esc(it.by||'')}${it.value?` · pH <b>${esc(it.value)}</b>`:''}</div>${photoLine(it)}${it.photo?.url?`<img class="thumb" src="${esc(it.photo.url)}">`:''}${fin?'':`<div class="actions"><button class="btn" data-undo="${p.id}">${esc(t('undo'))}</button></div>`}`}
+  else if(!fin){
+   if(p.type==='ph')body+=`<label>${esc(t('phVal'))}</label><input data-ph="${p.id}" type="text" inputmode="decimal" autocomplete="off" placeholder="7.2">`;
+   if(p.photo)body+=`<div class="actions"><button class="btn" data-photo="${p.id}">${esc(t('takePhoto'))}</button></div>`;
+   if(p.photo&&it?.photo)body+=`<img class="thumb" src="${esc(it.photo.url||'')}"><div class="meta">${esc(t('photoAt'))} <b>${esc(hm(it.photo.takenAt))}</b></div>`;
+   body+=`<div class="actions"><button class="btn ok" data-done="${p.id}">${esc(t('doIt'))}</button></div>`}
+  const tags=(p.photo?`<span class="badge cam">📷 ${esc(t('photoReq'))}</span>`:'')+(p.id==='ice'?`<span class="badge ${late?'red':''}">🕗 ${esc(t('dueAt'))} ${esc(cfg.iceTime)}</span>`:'');
+  return `<div class="card pt ${done?'done':''} ${late?'late':''} ${p.photo?'photoReq':''}"><h3>${esc(pname(p))}</h3><div>${tags}</div>${body}</div>`}).join('');
+ document.querySelectorAll('[data-ph]').forEach(i=>{if(keep[i.dataset.ph])i.value=keep[i.dataset.ph]});
+ $('finishBtn').textContent=t('finish');$('finishBtn').classList.toggle('hidden',fin)}
+/* zdjęcie: zmniejszamy, wysyłamy, zapisujemy godzinę zrobienia */
+async function shrink(file){try{const bmp=await createImageBitmap(file),max=1400,k=Math.min(1,max/Math.max(bmp.width,bmp.height)),c=document.createElement('canvas');c.width=Math.round(bmp.width*k);c.height=Math.round(bmp.height*k);c.getContext('2d').drawImage(bmp,0,0,c.width,c.height);return await new Promise(res=>c.toBlob(b=>res(b||file),'image/jpeg',.82))}catch(e){return file}}
+async function uploadPhoto(file,pid){const blob=await shrink(file),day=ymd(new Date()),path=`renseanlegg/${day}/${pid}-${Date.now()}.jpg`;const {error}=await db.storage.from(BUCKET).upload(path,blob,{contentType:'image/jpeg',upsert:false,cacheControl:'3600'});if(error)throw error;return{path,url:db.storage.from(BUCKET).getPublicUrl(path).data.publicUrl,takenAt:new Date().toISOString()}}
+async function setItem(pid,patch){const day=ymd(new Date());await mutate(rs=>{const r=rs.find(x=>x.date===day);if(!r)return rs;r.items=r.items||{};r.items[pid]={...(r.items[pid]||{}),...patch};if(patch._clear)delete r.items[pid];return rs})}
+$('fileIn').onchange=async e=>{const f=e.target.files[0];e.target.value='';const pid=photoTarget;photoTarget=null;if(!f||!pid)return;
+ toast(t('uploading'));try{const ph=await uploadPhoto(f,pid);await setItem(pid,{photo:ph,by:prof?.full_name||me.email});renderRun();toast(t('saved'))}catch(err){toast(t('err')+': '+err.message)}};
+$('points').addEventListener('click',async e=>{
+ const b=e.target.closest('button');if(!b)return;const r=todayRun();if(!r)return;
+ try{
+  if(b.dataset.photo){photoTarget=b.dataset.photo;$('fileIn').click();return}
+  if(b.dataset.undo){const pid=b.dataset.undo;await mutate(rs=>{const x=rs.find(q=>q.date===r.date);if(x&&x.items)delete x.items[pid];return rs});renderRun();return}
+  if(b.dataset.done){const pid=b.dataset.done,p=cfg.points.find(x=>x.id===pid),it=r.items?.[pid]||{},patch={doneAt:new Date().toISOString(),by:prof?.full_name||me.email,name:p.name};
+   if(p.photo&&!it.photo)return toast(t('needPhoto'));
+   if(p.type==='ph'){const v=(document.querySelector(`[data-ph="${pid}"]`)?.value||'').replace(',','.').trim(),n=Number(v);if(!v||!isFinite(n)||n<0||n>14)return toast(t('needPh'));patch.value=String(n)}
+   await setItem(pid,patch);renderRun();renderAlerts();toast(t('saved'))}
+ }catch(err){toast(t('err')+': '+err.message)}});
+$('finishBtn').onclick=async()=>{const r=todayRun();if(!r)return;if(doneCount(r)<activePts().length)return toast(t('finishLeft'));if(!confirm(t('confirmFinish')))return;
+ try{await mutate(rs=>{const x=rs.find(q=>q.date===r.date);if(x)x.finishedAt=new Date().toISOString();return rs});view('home')}catch(e){toast(t('err')+': '+e.message)}};
+$('startBtn').onclick=async()=>{
+ try{let r=todayRun();if(!r){const day=ymd(new Date()),run={id:'r'+Date.now(),date:day,startedAt:new Date().toISOString(),startedBy:prof?.full_name||me.email,items:{}};
+  await mutate(rs=>{if(!rs.find(x=>x.date===day))rs.push(run);return rs})}
+  if('Notification'in window&&Notification.permission==='default')try{Notification.requestPermission()}catch(e){}
+  view('run')}catch(e){toast(t('err')+': '+e.message)}};
+/* ustawienia punktów (admin / supervisor) */
+function renderAdmin(){
+ $('admTitle').textContent=t('adm');$('admHelp').textContent=t('admHelp');$('admClose').textContent=t('close');$('iceLbl').textContent=t('iceTime');$('iceTime').value=cfg.iceTime;
+ $('admList').innerHTML=cfg.points.map(p=>`<div class="adm" data-row="${p.id}"><span class="grab" data-grab="${p.id}" aria-label="drag">⠿</span><b style="flex:1 1 50%">${esc(pname(p))}</b><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><label class="sw"><input type="checkbox" data-a="photo" data-id="${p.id}" ${p.photo?'checked':''}>📷 ${esc(t('photo'))}</label><label class="sw"><input type="checkbox" data-a="active" data-id="${p.id}" ${p.active?'checked':''}>${esc(t('active'))}</label>${p.custom?`<button class="iconbtn" style="min-width:40px;height:40px" data-del="${p.id}" aria-label="${esc(t('del'))}">🗑️</button>`:''}</div></div>`).join('')+`<div style="padding-top:14px"><h3 style="margin:0 0 6px">${esc(t('addStep'))}</h3><label>${esc(t('stepName'))}</label><input id="newName" maxlength="80"><label>${esc(t('stepType'))}</label><select id="newType"><option value="check">${esc(t('typeCheck'))}</option><option value="ph">${esc(t('typePh'))}</option></select><label class="sw" style="margin-top:10px"><input type="checkbox" id="newPhoto">📷 ${esc(t('photoReq'))}</label><div class="actions"><button class="btn primary" id="addStepBtn">${esc(t('add'))}</button></div></div>`}
+async function saveCfg(){cfg.updated_at=new Date().toISOString();try{await writeState(CFG_ID,{iceTime:cfg.iceTime,updated_at:cfg.updated_at,order:cfg.points.map(p=>p.id),points:cfg.points.filter(p=>!p.custom).map(p=>({id:p.id,photo:p.photo,active:p.active})),custom:cfg.points.filter(p=>p.custom).map(p=>({id:p.id,name:p.name,type:p.type,photo:p.photo,active:p.active}))});toast(t('saved'))}catch(e){toast(t('err')+': '+e.message)}}
+$('admList').addEventListener('change',e=>{const i=e.target.closest('input[data-id]');if(!i)return;const p=cfg.points.find(x=>x.id===i.dataset.id);p[i.dataset.a]=i.checked;saveCfg()});
+$('admList').addEventListener('click',async e=>{
+ const d=e.target.closest('[data-del]');
+ if(d){const p=cfg.points.find(x=>x.id===d.dataset.del);if(!p||!confirm(t('delConfirm')+' "'+p.name+'"?'))return;cfg.points=cfg.points.filter(x=>x.id!==p.id);await saveCfg();renderAdmin();return}
+ if(e.target.id==='addStepBtn'){const name=$('newName').value.trim();if(!name)return toast(t('stepNameNeed'));
+  const p={id:'c'+Date.now().toString(36),name,type:$('newType').value,photo:$('newPhoto').checked,active:true,custom:true},i=cfg.points.findIndex(x=>x.id==='ice');
+  cfg.points.splice(i<0?cfg.points.length:i,0,p);await saveCfg();renderAdmin()}});
+(()=>{let row=null,pid=null;const list=$('admList');
+ list.addEventListener('pointerdown',e=>{const g=e.target.closest('[data-grab]');if(!g)return;e.preventDefault();pid=g.dataset.grab;row=list.querySelector(`[data-row="${pid}"]`);row.classList.add('dragging');try{g.setPointerCapture(e.pointerId)}catch(x){}});
+ list.addEventListener('pointermove',e=>{if(!row)return;e.preventDefault();
+  const rows=[...list.querySelectorAll('[data-row]')].filter(r=>r!==row);
+  for(const r of rows){const b=r.getBoundingClientRect(),mid=b.top+b.height/2;
+   const pos=row.compareDocumentPosition(r);
+   if(e.clientY<mid&&(pos&Node.DOCUMENT_POSITION_PRECEDING)){list.insertBefore(row,r);break}
+   if(e.clientY>mid&&(pos&Node.DOCUMENT_POSITION_FOLLOWING)){r.after(row);break}}
+  if(e.clientY<70)window.scrollBy(0,-14);else if(e.clientY>innerHeight-70)window.scrollBy(0,14)});
+ const end=async()=>{if(!row)return;row.classList.remove('dragging');const ids=[...list.querySelectorAll('[data-row]')].map(r=>r.dataset.row),before=cfg.points.map(p=>p.id).join();row=null;pid=null;
+  if(ids.join()===before)return;cfg.points=ids.map(id=>cfg.points.find(p=>p.id===id));await saveCfg()};
+ list.addEventListener('pointerup',end);list.addEventListener('pointercancel',end)})();
+$('iceTime').onchange=e=>{if(e.target.value){cfg.iceTime=e.target.value;saveCfg()}};
+$('history').addEventListener('click',e=>{const b=e.target.closest('[data-day]');if(b)view('day',b.dataset.day)});$('dayBack').onclick=()=>view('home');
+$('adminBtn').onclick=()=>view('admin');$('admClose').onclick=()=>view('home');
+$('homeBtn').onclick=()=>{try{if(parent!==window){parent.postMessage({type:'vf-open-lobby'},'*');return}}catch(e){}location.href=new URL('../',location.href).href};
+function applyLang(code){lang=UI[code]?code:(code==='nb'?'no':'pl');try{localStorage.setItem('vf-language',lang)}catch(e){}document.documentElement.lang=lang==='no'?'nb':lang;$('subtitle').textContent=t('sub');const v=!$('run').classList.contains('hidden')?'run':!$('admin').classList.contains('hidden')?'admin':!$('day').classList.contains('hidden')?'day':'home';if(me&&ready)view(v)}
+window.addEventListener('message',e=>{if(e.data?.type==='vf-language')applyLang(e.data.language)});
+if(parent!==window)try{parent.postMessage({type:'vf-language-request'},'*')}catch(e){}
+(async()=>{
+ const {data:{session}}=await db.auth.getSession();if(!session)return location.href=new URL('../',location.href).href;
+ me=session.user;const {data:p}=await db.from('profiles').select('*').eq('id',me.id).maybeSingle();prof=p||{};
+ const role=String(prof.role||'').toLowerCase();isAdmin=['admin','supervisor'].includes(role);$('adminBtn').classList.toggle('hidden',!isAdmin);
+ $('subtitle').textContent=t('sub');
+ try{await loadAll()}catch(e){toast(t('err')+': '+e.message)}
+ ready=true;view(todayRun()&&!todayRun().finishedAt?'run':'home');
+ setInterval(()=>{if(!$('admin').classList.contains('hidden'))return;renderAlerts()},30000);
+ document.addEventListener('visibilitychange',async()=>{if(document.hidden||!me)return;try{await loadAll();if(!$('admin').classList.contains('hidden')||!$('day').classList.contains('hidden'))return;view(!$('run').classList.contains('hidden')?'run':'home')}catch(e){}});
+})();
+</script>
+
+<script id="tts-read-aloud-2026-10-30">(()=>{try{
+if(!('speechSynthesis' in window))return;
+const KEY='vf-tts',LC={pl:'pl-PL',en:'en-GB',no:'nb-NO',nb:'nb-NO',lt:'lt-LT'};
+const on=()=>{try{return localStorage.getItem(KEY)==='1'}catch(e){return false}};
+const lang=()=>{try{return LC[localStorage.getItem('vf-language')]||'pl-PL'}catch(e){return 'pl-PL'}};
+const MSG={pl:['Czytanie na głos włączone. Przytrzymaj tekst, a zostanie przeczytany.','Czytanie na głos wyłączone.'],en:['Read aloud is on. Press and hold a text to hear it.','Read aloud is off.'],no:['Opplesning er på. Trykk og hold på en tekst for å høre den.','Opplesning er av.'],lt:['Skaitymas balsu įjungtas. Palaikykite tekstą, kad jį išgirstumėte.','Skaitymas balsu išjungtas.']};
+function say(text,lg){const s=window.speechSynthesis;try{s.cancel();s.resume()}catch(e){}
+ text=String(text||'').replace(/[\p{Extended_Pictographic}‍️]/gu,' ').replace(/\s+/g,' ').trim();if(!text)return;
+ const parts=text.match(/[^.!?;\n]+[.!?;]*/g)||[text],chunks=[];let cur='';
+ for(const p of parts){if((cur+p).length>180&&cur){chunks.push(cur);cur=p}else cur+=p}if(cur)chunks.push(cur);
+ const voices=s.getVoices(),pre=lg.slice(0,2).toLowerCase(),v=voices.find(x=>x.lang&&x.lang.replace('_','-').toLowerCase()===lg.toLowerCase())||voices.find(x=>x.lang&&x.lang.toLowerCase().startsWith(pre)||(pre==='nb'&&/^n[bo]/i.test(x.lang||'')));
+ setTimeout(()=>{for(const c of chunks){const u=new SpeechSynthesisUtterance(c.trim());u.lang=lg;if(v)u.voice=v;u.rate=.92;s.speak(u)}},90)}
+/* przeglądarki (iOS/Safari) pozwalają mówić dopiero po geście użytkownika na stronie: odblokowujemy cichą wypowiedzią */
+/* rozgrzewka: lista głosów ładowana od razu + cicha wypowiedź w języku użytkownika już przy pierwszym dotknięciu */
+let warmed=false;try{speechSynthesis.getVoices();speechSynthesis.addEventListener('voiceschanged',()=>{try{speechSynthesis.getVoices()}catch(e){}})}catch(e){}
+const unlock=()=>{try{if(!on()||speechSynthesis.speaking)return;const lg=lang(),u=new SpeechSynthesisUtterance(' ');u.volume=0;u.lang=lg;const vs=speechSynthesis.getVoices(),v=vs.find(x=>x.lang&&x.lang.replace('_','-').toLowerCase()===lg.toLowerCase())||vs.find(x=>x.lang&&x.lang.toLowerCase().startsWith(lg.slice(0,2).toLowerCase()));if(v)u.voice=v;speechSynthesis.speak(u);warmed=true}catch(e){}};
+['pointerdown','touchstart','touchend','click','keydown'].forEach(n=>document.addEventListener(n,unlock,{capture:true,passive:true}));
+if(on())try{unlock()}catch(e){}
+window.vfSpeak=text=>say(text,lang());
+window.vfTtsOn=on;
+window.vfTtsSet=function(v){try{localStorage.setItem(KEY,v?'1':'0')}catch(e){}apply();const m=MSG[Object.keys(MSG).find(k=>LC[k]===lang())||'pl'];say(v?m[0]:m[1],lang())};
+const st=document.createElement('style');st.textContent='body.vf-tts *:not(input):not(textarea):not(select){-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}.vf-tts-hit{outline:3px solid #22c55e!important;outline-offset:2px;border-radius:6px}';document.head.appendChild(st);
+function apply(){document.body.classList.toggle('vf-tts',on());if(!on())try{speechSynthesis.cancel()}catch(e){}}
+apply();window.addEventListener('storage',e=>{if(e.key===KEY)apply()});
+const SEL='li,article,tr,.workCard,.bugCard,.quickCard,.module,.entry,[class*="card"],[class*="Card"],[class*="msg"],p,h1,h2,h3,h4,h5,td,th,label,button,a,span,div';
+function pick(t){let el=t.closest?t.closest(SEL):null;while(el&&el!==document.body){const tx=(el.innerText||'').trim();if(tx.length>=2&&tx.length<=1500)return el;el=el.parentElement}return null}
+let timer=null,sx=0,sy=0,fired=false,hit=null;
+const cancel=()=>{clearTimeout(timer);timer=null};
+document.addEventListener('pointerdown',e=>{if(!on()||e.button>0)return;const t=e.target;if(!t.closest||t.closest('input,textarea,select,[contenteditable="true"]'))return;fired=false;sx=e.clientX;sy=e.clientY;cancel();
+ timer=setTimeout(()=>{const el=pick(t);if(!el)return;fired=true;if(hit)hit.classList.remove('vf-tts-hit');hit=el;el.classList.add('vf-tts-hit');setTimeout(()=>el.classList.remove('vf-tts-hit'),1200);if(navigator.vibrate)try{navigator.vibrate(30)}catch(x){}say(el.innerText,lang())},550)},true);
+document.addEventListener('pointermove',e=>{if(timer&&Math.hypot(e.clientX-sx,e.clientY-sy)>10)cancel()},true);
+['pointerup','pointercancel'].forEach(n=>document.addEventListener(n,cancel,true));
+document.addEventListener('scroll',cancel,true);
+document.addEventListener('contextmenu',e=>{if(on()&&!(e.target.closest&&e.target.closest('input,textarea,select')))e.preventDefault()},true);
+document.addEventListener('click',e=>{if(fired){fired=false;e.preventDefault();e.stopPropagation();return}if(on()&&speechSynthesis.speaking)speechSynthesis.cancel()},true);
+}catch(e){console.warn('tts',e)}})();</script>
+</body></html>

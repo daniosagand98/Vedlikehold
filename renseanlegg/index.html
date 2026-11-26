@@ -55,7 +55,7 @@ details.hist{border-top:1px solid var(--line);padding:10px 0}details.hist summar
 <section id="day" class="hidden"><div class="card"><div class="row"><h2 style="margin:0" id="dayTitle"></h2><button class="btn" id="dayBack"></button></div><p class="muted" id="dayInfo"></p></div><div id="dayRows"></div><div class="card hidden" id="dayDelCard"><button class="btn red" id="dayDel" style="width:100%"></button></div></section>
 <section id="run" class="hidden"><div class="card"><div class="row"><b id="progressText"></b><span class="muted" id="runInfo"></span></div><div class="progress" style="margin-top:10px"><i id="bar"></i></div></div><div id="points"></div><div class="card"><button class="btn ok" id="finishBtn" style="width:100%"></button><button class="btn red" id="cancelBtn" style="width:100%;margin-top:10px"></button></div></section>
 <section id="admin" class="hidden"><div class="card"><div class="row"><h2 style="margin:0" id="admTitle"></h2><button class="btn" id="admClose"></button></div><p class="muted" id="admHelp"></p></div><div class="card" id="admList"></div><div class="card"><label id="iceLbl"></label><input id="iceTime" type="time"></div><div class="card"><label id="phLimLbl"></label><input id="phLimit" type="text" inputmode="decimal"><label id="phTimeLbl"></label><input id="phTime" type="time"></div></section>
-<footer class="appFooter">Renseanlegg v1.4.1<br>Created and designed by: <a href="https://dwsystem.eu" target="_blank" rel="noopener">DWSystem</a></footer>
+<footer class="appFooter">Renseanlegg v1.5.0<br>Created and designed by: <a href="https://dwsystem.eu" target="_blank" rel="noopener">DWSystem</a></footer>
 </main><div class="toast" id="toast"></div>
 <input id="fileIn" type="file" accept="image/*" capture="environment" class="hidden">
 <script>
@@ -96,6 +96,13 @@ async function loadAll(){
  cfg=mergeCfg(await readState(CFG_ID));
  const r=await readState(RUNS_ID);runs=Array.isArray(r?.runs)?r.runs:[];
  await cleanup();
+ await closeStale();
+}
+/* niedokończona kontrola z wczoraj lub starsza zamyka się automatycznie o północy (czerwony X) */
+async function closeStale(){
+ const td=ymd(new Date()),st=runs.filter(r=>r.date<td&&!r.finishedAt&&!r.abandonedAt);
+ if(!st.length||!me)return;
+ await mutate(rs=>{for(const r of rs)if(r.date<td&&!r.finishedAt&&!r.abandonedAt)r.abandonedAt=new Date(r.date+'T23:59:59').toISOString();return rs});
 }
 /* historia trzymana 30 dni: starsze wpisy i ich zdjęcia są usuwane */
 async function cleanup(){
@@ -136,13 +143,13 @@ function renderHome(){
  const list=[...runs].sort((a,b)=>b.date.localeCompare(a.date));
  $('histCard').classList.toggle('hidden',!isAdmin);
  $('history').innerHTML=list.length?list.map(r=>{const n=Object.values(r.items||{}).filter(i=>i.photo).length;
-  return `<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><button class="btn dayBtn" style="margin:0;flex:1" data-day="${esc(r.date)}"><span>${r.finishedAt?'✅':'⏳'} <b>${esc(dm(r.date))}</b> · ${esc(r.startedBy||'')}</span><span class="muted">${doneCount(r)}/${activePts().length}${n?` · 📷 ${n}`:''} ›</span></button><button class="iconbtn" data-delday="${esc(r.date)}" aria-label="${esc(t('delRun'))}">🗑️</button></div>`}).join(''):`<p class="muted">${esc(t('noHist'))}</p>`}
+  return `<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><button class="btn dayBtn" style="margin:0;flex:1" data-day="${esc(r.date)}"><span>${r.finishedAt?'✅':r.abandonedAt?'❌':'⏳'} <b>${esc(dm(r.date))}</b> · ${esc(r.startedBy||'')}</span><span class="muted">${doneCount(r)}/${activePts().length}${n?` · 📷 ${n}`:''} ›</span></button><button class="iconbtn" data-delday="${esc(r.date)}" aria-label="${esc(t('delRun'))}">🗑️</button></div>`}).join(''):`<p class="muted">${esc(t('noHist'))}</p>`}
 function renderDay(date){
  const r=runs.find(x=>x.date===date);if(!r)return view('home');
  $('dayDel').textContent=t('delRun');$('dayDelCard').classList.toggle('hidden',!isAdmin);
  $('dayTitle').textContent=dm(r.date);$('dayBack').textContent='‹ '+t('back');
  const known=new Set(cfg.points.map(p=>p.id)),all=[...cfg.points,...Object.keys(r.items||{}).filter(k=>!known.has(k)).map(k=>({id:k,name:r.items[k].name||k}))];
- $('dayInfo').innerHTML=`${esc(t('startedBy'))}: <b>${esc(hm(r.startedAt))}</b> ${esc(t('by'))} ${esc(r.startedBy||'')}${r.finishedAt?` · ${esc(t('finishedAt'))}: <b>${esc(hm(r.finishedAt))}</b>`:` · ${esc(t('open'))}`}`;
+ $('dayInfo').innerHTML=`${esc(t('startedBy'))}: <b>${esc(hm(r.startedAt))}</b> ${esc(t('by'))} ${esc(r.startedBy||'')}${r.finishedAt?` · ${esc(t('finishedAt'))}: <b>${esc(hm(r.finishedAt))}</b>`:r.abandonedAt?` · ❌ ${esc(({pl:'nie zakończono – zamknięto automatycznie o północy',en:'not finished – closed automatically at midnight',no:'ikke fullført – lukket automatisk ved midnatt'})[typeof lang!=='undefined'&&lang||'pl']||'')}`:` · ${esc(t('open'))}`}`;
  $('dayRows').innerHTML=all.map(p=>{const it=r.items?.[p.id];
   if(!it?.doneAt)return `<div class="card pt"><h3>${esc(pname(p))}</h3><div class="meta">— ${esc(t('notDone'))}</div></div>`;
   return `<div class="card pt done"><h3>${esc(pname(p))}</h3><div class="meta">✅ ${esc(t('done'))} <b>${esc(hm(it.doneAt))}</b> ${esc(t('by'))} ${esc(it.by||'')}${it.value?` · pH <b>${esc(it.value)}</b>${Number(it.value)>cfg.phLimit?' ⚠️':''}`:''}</div>${r.rechecks?.[p.id]?`<div class="meta">🧪 ${esc(t('recheck'))} ${esc(r.rechecks[p.id].due)}: ${r.rechecks[p.id].doneAt?`<b>${esc(hm(r.rechecks[p.id].doneAt))}</b> · pH <b>${esc(r.rechecks[p.id].value)}</b> ${esc(t('by'))} ${esc(r.rechecks[p.id].by||'')}`:esc(t('notDone'))}</div>`:''}${photoLine(it)}${it.photo?.url?`<a href="${esc(it.photo.url)}" target="_blank" rel="noopener"><img class="thumb" loading="lazy" src="${esc(it.photo.url)}"></a>`:''}</div>`}).join('')}
